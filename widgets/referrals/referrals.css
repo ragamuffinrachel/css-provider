@@ -1,0 +1,65 @@
+.tabs {
+  display: flex;
+  gap: .5rem;
+  margin: 1.5rem 1rem 0;
+}
+
+.tabs button {
+  flex: 1;
+  padding: .75rem;
+  border: 1px solid var(--accent);
+  background: #fff;
+  color: var(--accent);
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: .2s;
+  font-family: 'termina', sans-serif;
+}
+
+.tabs button[aria-selected="true"] {
+  background: var(--accent);
+  color: #fff;
+}
+
+.pane {
+  display: none;
+  max-width: 900px;
+  margin: 1rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: slideIn .3s ease-in-out;
+}
+
+.pane.active { display: block; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+ul {
+  margin: .5rem 0 0 1rem;
+  list-style: disc inside;
+}
+
+li {
+  margin-bottom: .5rem;
+  font-size: .95rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h2, h3 {
+  font-family: 'termina', sans-serif;
+  font-weight: 300;
+}
