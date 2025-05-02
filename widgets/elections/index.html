@@ -189,28 +189,6 @@
 
   </div>
 
-  <script>
-    const tabs   = [...document.querySelectorAll('[role="tab"]')];
-    const panels = [...document.querySelectorAll('[role="tabpanel"]')];
-
-    tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
-
-    // arrow-key navigation
-    document.querySelector('.tabs').addEventListener('keydown', e=>{
-      const i = tabs.indexOf(document.activeElement);
-      if (i < 0) return;
-      if (e.key === 'ArrowRight') tabs[(i + 1) % tabs.length].focus();
-      if (e.key === 'ArrowLeft')  tabs[(i + tabs.length - 1) % tabs.length].focus();
-    });
-
-    function activateTab(tab){
-      tabs.forEach(t => t.setAttribute('aria-selected', t === tab));
-      panels.forEach(p =>
-        p.toggleAttribute('data-active',
-          p.id === tab.getAttribute('aria-controls')
-        )
-      );
-    }
-  </script>
+ <script src="../../assets/utils.js"></script>
 </body>
 </html>
