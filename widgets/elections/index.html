@@ -101,12 +101,20 @@
       background: var(--accent);
       color: #fff;
     }
+    /* base padding, alignment & sizing for all cells */
     th, td {
       padding: .75rem 1rem;
       text-align: left;
       font-size: .95rem;
-      font-family: 'termina', sans-serif;
       font-weight: 300;
+    }
+    /* headings stay Termina */
+    thead th {
+      font-family: 'termina', sans-serif;
+    }
+    /* body cells inherit Montserrat from <body> */
+    tbody td {
+      font-family: 'Montserrat', sans-serif;
     }
     tbody tr:nth-child(odd) {
       background: var(--stripe);
