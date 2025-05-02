@@ -2,21 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Healthcare Services Elections</title>
+  <title>Community Support Services – Elections widget</title>
 
-  <!-- fonts… -->
+  <!-- Typekit for Termina Light -->
   <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
+  <!-- Google Fonts: Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-  <!-- shared variables & resets -->
-  <link rel="stylesheet" href="../../assets/global.css">
-  <!-- this widget’s styles -->
-  <link rel="stylesheet" href="elections.css">
+  <style>
+    :root {
+      --accent:  #8BA4D5;
+      --text:    #2B2B2B;
+      --bg:      #FFFFFF;
+      --stripe:  #F5F7FA;
+      --radius:  6px;
+      --shadow:  0 1px 3px rgba(0,0,0,.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+    }
+    .tabs button,
+    th {
+      font-family: 'termina', sans-serif;
+      font-weight: 300;
+    }
+    .widget {
+      width: 85%;
+      min-width: 600px;
+      max-width: 1000px;
+      margin: 3rem auto;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem;
+      margin-bottom: 1rem;
+    }
+    .tabs button {
+      flex: 1 1 auto;
+      min-width: 110px;
+      border: 1px solid var(--accent);
+      background: var(--bg);
+      color: var(--accent);
+      padding: .65rem 1rem;
+      font-size: 1rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: .15s;
+    }
+    .tabs button[aria-selected="true"],
+    .tabs button:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    .tabs button:focus { outline: 2px solid var(--accent); }
+
+    .panel { display: none; }
+    .panel[data-active] {
+      display: block;
+      animation: slideIn 0.3s ease-in-out;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    th:nth-child(1), td:nth-child(1) { width: 20%; }
+    th:nth-child(2), td:nth-child(2) { width: 45%; }
+    th:nth-child(3), td:nth-child(3) { width: 35%; }
+
+    thead { background: var(--accent); color: #fff; }
+    th, td {
+      padding: .75rem 1rem;
+      text-align: left;
+      font-size: .95rem;
+    }
+    tbody tr:nth-child(odd) { background: var(--stripe); }
+    tbody tr:hover { background: rgba(0,119,200,.08); }
+
+    @media(max-width:650px) {
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
 </head>
 <body>
   <div class="widget">
@@ -189,6 +271,28 @@
 
   </div>
 
- <script src="../../assets/utils.js"></script>
+  <script>
+    const tabs   = [...document.querySelectorAll('[role="tab"]')];
+    const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+
+    tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
+
+    // arrow-key navigation
+    document.querySelector('.tabs').addEventListener('keydown', e=>{
+      const i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      if (e.key === 'ArrowRight') tabs[(i + 1) % tabs.length].focus();
+      if (e.key === 'ArrowLeft')  tabs[(i + tabs.length - 1) % tabs.length].focus();
+    });
+
+    function activateTab(tab){
+      tabs.forEach(t => t.setAttribute('aria-selected', t === tab));
+      panels.forEach(p =>
+        p.toggleAttribute('data-active',
+          p.id === tab.getAttribute('aria-controls')
+        )
+      );
+    }
+  </script>
 </body>
 </html>
