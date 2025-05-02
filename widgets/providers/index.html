@@ -3,73 +3,21 @@
 <head>
   <meta charset="utf-8">
   <title>CSS Contracted Providers Widget</title>
+
   <!-- Typekit for Termina Light -->
   <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
   <!-- Google Fonts: Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent:  #8BA4D5;
-      --text:    #2B2B2B;
-      --bg:      #FFFFFF;
-      --stripe:  #F5F7FA;
-      --radius:  6px;
-      --shadow:  0 1px 3px rgba(0,0,0,.1);
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-    .widget {
-      font-family: 'termina-300', 'Montserrat', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      padding: 1.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .widget h2 {
-      margin: 0 0 0.5rem;
-      font-size: 1.75rem;
-      font-weight: 400;
-      color: var(--accent);
-    }
-
-    .widget p {
-      margin: 0 0 1.5rem;
-      line-height: 1.4;
-    }
-
-    .providers-grid {
-      display: grid;
-      /* narrower min width so cards shrink */
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 0.5rem;           /* tighter gap */
-      justify-content: center;
-    }
-
-    .provider-card {
-      background: var(--stripe);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      font-size: 0.8rem;    /* smaller text */
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0.75rem;     /* less padding */
-      min-height: 60px;     /* shorter cards */
-      transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-    }
-
-    .provider-card:hover {
-      box-shadow: var(--shadow), 0 0 8px var(--accent);
-      transform: translateY(-2px);
-    }
-  </style>
+  <!-- shared variables & resets -->
+  <link rel="stylesheet" href="../../assets/global.css">
+  <!-- only this widget’s unique styles -->
+  <link rel="stylesheet" href="providers.css">
 </head>
 <body>
   <div class="widget">
