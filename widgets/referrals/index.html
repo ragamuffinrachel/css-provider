@@ -11,13 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --accent: #8BA4D5;
-      --text:   #2B2B2B;
-      --bg:     transparent;
-      --radius: 6px;
-      --shadow: 0 1px 3px rgba(0,0,0,.1);
+      --accent:  #8BA4D5;
+      --text:    #2B2B2B;
+      --bg:      transparent;
+      --radius:  6px;
+      --shadow:  0 1px 3px rgba(0,0,0,.1);
     }
-    *, *::before, *::after { box-sizing: border-box; }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
@@ -25,19 +29,24 @@
       color: var(--text);
       font-family: 'Montserrat', sans-serif;
     }
+
     /* Termina Light for tabs and headings */
     .tabs button,
     h2, h3 {
       font-family: 'termina', sans-serif;
       font-weight: 300;
     }
+
+    /* make tabs container match pane width & center it */
     .tabs {
       display: flex;
       gap: .5rem;
-      margin: 1.5rem 1rem 0;
+      max-width: 900px;
+      margin: 1.5rem auto 0;
     }
+
     .tabs button {
-      flex: 1;
+      flex: 1;                       /* each tab takes equal share */
       padding: .75rem;
       border: 1px solid var(--accent);
       background: #fff;
@@ -47,12 +56,16 @@
       cursor: pointer;
       transition: .2s;
     }
+
     .tabs button[aria-selected="true"] {
       background: var(--accent);
       color: #fff;
     }
+
+    /* panes also constrained and centered */
     .pane {
       display: none;
+      width: 100%;
       max-width: 900px;
       margin: 1rem auto;
       padding: 1rem;
@@ -61,19 +74,35 @@
       box-shadow: var(--shadow);
       animation: slideIn .3s ease-in-out;
     }
-    .pane.active { display: block; }
+
+    .pane.active {
+      display: block;
+    }
+
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
     ul {
       margin: .5rem 0 0 1rem;
       list-style: disc inside;
       font-family: 'Montserrat', sans-serif;
     }
-    li { margin-bottom: .5rem; font-size: .95rem; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+
+    li {
+      margin-bottom: .5rem;
+      font-size: .95rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
