@@ -70,17 +70,7 @@
     </p>
   </div>
 
-  <script>
-    const tabs = document.querySelectorAll('[role="tab"]');
-    tabs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabs.forEach(b => b.setAttribute('aria-selected', 'false'));
-        btn.setAttribute('aria-selected', 'true');
-        document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
-        document.querySelector(btn.dataset.target).classList.add('active');
-      });
-    });
-  </script>
+  <script src="../../assets/utils.js"></script>
 
 </body>
 </html>
