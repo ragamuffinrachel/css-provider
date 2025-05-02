@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSS Contracted Providers Widget</title>
+  <!-- Typekit for Termina Light -->
+  <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent:  #8BA4D5;
+      --text:    #2B2B2B;
+      --bg:      #FFFFFF;
+      --stripe:  #F5F7FA;
+      --radius:  6px;
+      --shadow:  0 1px 3px rgba(0,0,0,.1);
+    }
+
+    .widget {
+      font-family: 'termina-300', 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .widget h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .widget p {
+      margin: 0 0 1.5rem;
+      line-height: 1.4;
+    }
+
+    .providers-grid {
+      display: grid;
+      /* narrower min width so cards shrink */
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.5rem;           /* tighter gap */
+      justify-content: center;
+    }
+
+    .provider-card {
+      background: var(--stripe);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      font-size: 0.8rem;    /* smaller text */
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.75rem;     /* less padding */
+      min-height: 60px;     /* shorter cards */
+      transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    .provider-card:hover {
+      box-shadow: var(--shadow), 0 0 8px var(--accent);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="widget">
+    <h2>CSS Contracted Providers</h2>
+    <p>To date, Kern Health System is contracted with 26 Community Based Organizations (CBO) delivering 57 services throughout Kern County.</p>
+    <div class="providers-grid">
+      <div class="provider-card">24Hr Homecare</div>
+      <div class="provider-card">Bakersfield Community Health Center</div>
+      <div class="provider-card">Community Action Partnership of Kern</div>
+      <div class="provider-card">Central California Asthma Collaborative</div>
+      <div class="provider-card">CityServe Network</div>
+      <div class="provider-card">Community Wellness Program / Mercy Hospital</div>
+      <div class="provider-card">EA Family Services</div>
+      <div class="provider-card">GA Foods</div>
+      <div class="provider-card">Good Samaritan Healing Center</div>
+      <div class="provider-card">Habitat for Humanity</div>
+      <div class="provider-card">Housing Authority of the County of Kern</div>
+      <div class="provider-card">Hunger Not Impossible / Bento</div>
+      <div class="provider-card">Kern BHRS</div>
+      <div class="provider-card">Kern Hospital Authority (KMC)</div>
+      <div class="provider-card">Mercy House Living Centers</div>
+      <div class="provider-card">Modify Health</div>
+      <div class="provider-card">PurFoods LLC / Moms Meals</div>
+      <div class="provider-card">The Open Door Network</div>
+      <div class="provider-card">Corbow Inc / Papo Hernandez</div>
+      <div class="provider-card">Sunterra Inc / Project Food Box</div>
+      <div class="provider-card">Roots Food Group</div>
+      <div class="provider-card">SD Healthcare</div>
+      <div class="provider-card">St. Vincent Preventative Care</div>
+      <div class="provider-card">The Mission of Kern County / Bakersfield Rescue Mission</div>
+      <div class="provider-card">Pathway Assisted Living Center</div>
+      <div class="provider-card">Kern Psychiatric Wellness Center</div>
+    </div>
+  </div>
+</body>
+</html>
