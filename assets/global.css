@@ -1,1 +1,30 @@
+/* ---------------------------------------------
+   GLOBAL: fonts + design tokens + resets
+   --------------------------------------------- */
+
+/* (You could also @import your font‑hosted styles here,
+   but leaving the <link> tags in HTML is fine too.) */
+
+:root {
+  --accent:  #8BA4D5;
+  --text:    #2B2B2B;
+  --bg:      #FFFFFF;
+  --stripe:  #F5F7FA;
+  --radius:  6px;
+  --shadow:  0 1px 3px rgba(0,0,0,.1);
+}
+
+/* box‑sizing reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* page reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;        /* so Rise’s background still shows */
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+}
 
