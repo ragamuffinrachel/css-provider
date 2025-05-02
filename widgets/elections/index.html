@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>Community Support Services – Elections widget</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Typekit for Termina Light -->
   <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
@@ -21,28 +20,25 @@
       --radius:  6px;
       --shadow:  0 1px 3px rgba(0,0,0,.1);
     }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
-    html {
-      font-size: clamp(0.875rem, 1.2vw + 0.5rem, 1rem);
-    }
-    body {
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
       margin: 0;
       padding: 0;
       background: transparent;
       color: var(--text);
       font-family: 'Montserrat', sans-serif;
     }
-
+    .tabs button,
+    th {
+      font-family: 'termina', sans-serif;
+      font-weight: 300;
+    }
     .widget {
-      width: 90vw;
+      width: 85%;
+      min-width: 600px;
       max-width: 1000px;
       margin: 3rem auto;
     }
-
     .tabs {
       display: flex;
       flex-wrap: wrap;
@@ -50,32 +46,25 @@
       margin-bottom: 1rem;
     }
     .tabs button {
-      flex: 1 1 0;
+      flex: 1 1 auto;
+      min-width: 110px;
       border: 1px solid var(--accent);
       background: var(--bg);
       color: var(--accent);
       padding: .65rem 1rem;
       font-size: 1rem;
-      font-family: 'termina', sans-serif;
-      font-weight: 300;
       border-radius: var(--radius);
       cursor: pointer;
       transition: .15s;
-      text-align: center;
-      min-width: 0;
     }
     .tabs button[aria-selected="true"],
     .tabs button:hover {
       background: var(--accent);
       color: #fff;
     }
-    .tabs button:focus {
-      outline: 2px solid var(--accent);
-    }
+    .tabs button:focus { outline: 2px solid var(--accent); }
 
-    .panel {
-      display: none;
-    }
+    .panel { display: none; }
     .panel[data-active] {
       display: block;
       animation: slideIn 0.3s ease-in-out;
@@ -97,76 +86,17 @@
     th:nth-child(2), td:nth-child(2) { width: 45%; }
     th:nth-child(3), td:nth-child(3) { width: 35%; }
 
-    thead {
-      background: var(--accent);
-      color: #fff;
-    }
-    /* base padding, alignment & sizing for all cells */
+    thead { background: var(--accent); color: #fff; }
     th, td {
       padding: .75rem 1rem;
       text-align: left;
       font-size: .95rem;
-      font-weight: 300;
     }
-    /* headings stay Termina */
-    thead th {
-      font-family: 'termina', sans-serif;
-    }
-    /* body cells inherit Montserrat from <body> */
-    tbody td {
-      font-family: 'Montserrat', sans-serif;
-    }
-    tbody tr:nth-child(odd) {
-      background: var(--stripe);
-    }
-    tbody tr:hover {
-      background: rgba(0,119,200,.08);
-    }
+    tbody tr:nth-child(odd) { background: var(--stripe); }
+    tbody tr:hover { background: rgba(0,119,200,.08); }
 
-    /* Narrow screens: enable horizontal scroll on tabs */
-    @media (max-width: 800px) {
-      .tabs {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-      }
-      .tabs button {
-        flex: 0 0 auto;
-        min-width: 120px;
-        scroll-snap-align: start;
-      }
-    }
-
-    /* Mobile: table → cards */
-    @media (max-width: 600px) {
-      table {
-        border: 0;
-      }
-      thead {
-        display: none;
-      }
-      tr {
-        display: block;
-        margin-bottom: 1rem;
-        background: var(--stripe);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-      }
-      td {
-        display: flex;
-        justify-content: space-between;
-        padding: .75rem 1rem;
-        border-bottom: 1px solid rgba(0,0,0,.05);
-      }
-      td::before {
-        content: attr(data-label);
-        font-weight: 600;
-        flex: 1 1 40%;
-      }
-      td:last-child {
-        border-bottom: 0;
-      }
+    @media(max-width:650px) {
+      table { display: block; overflow-x: auto; }
     }
   </style>
 </head>
@@ -175,6 +105,7 @@
 
     <div class="tabs" role="tablist">
       <button role="tab" id="t0" aria-controls="p0" aria-selected="true">1/1/22</button>
+      <button role="tab" id="t5" aria-controls="p5">1/1/22 cont.</button>
       <button role="tab" id="t1" aria-controls="p1">1/1/23</button>
       <button role="tab" id="t2" aria-controls="p2">7/1/23</button>
       <button role="tab" id="t3" aria-controls="p3">1/1/24</button>
@@ -184,18 +115,12 @@
     <!-- ============ 1 JAN 2022 =================================== -->
     <section class="panel" id="p0" role="tabpanel" aria-labelledby="t0" data-active>
       <table>
-        <thead>
-          <tr>
-            <th>Service</th>
-            <th>Description</th>
-            <th>Contracted Providers</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
         <tbody>
           <tr>
-            <td data-label="Service">Housing Transition Navigation Services</td>
-            <td data-label="Description">Assists members in their search for housing options, including completing housing applications, securing documentation, and providing rental payment assistance.</td>
-            <td data-label="Contracted Providers">
+            <td>Housing Transition Navigation Services</td>
+            <td>Assists members in their search for housing options, including completing housing applications, securing documentation, and providing rental payment assistance.</td>
+            <td>
               1. Kern County Housing Authority<br>
               2. CAPK<br>
               3. EA Family Services<br>
@@ -207,40 +132,14 @@
             </td>
           </tr>
           <tr>
-            <td data-label="Service">Housing Deposits</td>
-            <td data-label="Description">Co-ordinates one-time funds for security deposits, initial utility fees, medical equipment and basic household expenses to support independent living.</td>
-            <td data-label="Contracted Providers">Same providers as above (1–8).</td>
+            <td>Housing Deposits</td>
+            <td>Co-ordinates one-time funds for security deposits, initial utility fees, medical equipment and basic household expenses to support independent living.</td>
+            <td>Same providers as above (1–8).</td>
           </tr>
           <tr>
-            <td data-label="Service">Housing Tenancy &amp; Sustaining Services</td>
-            <td data-label="Description">Provides education and resources to prevent loss of housing, including tenant-landlord rights and identifying lease violations (e.g., hoarding).</td>
-            <td data-label="Contracted Providers">Same providers as above (1–8).</td>
-          </tr>
-          <tr>
-            <td data-label="Service">Recuperative Care (Medical Respite)</td>
-            <td data-label="Description">Short-term residential care post-hospitalization, including transport to appointments plus food and housing assistance.</td>
-            <td data-label="Contracted Providers">
-              1. Good Samaritan Healing Center (Bakersfield &amp; Delano)<br>
-              2. Papo Hernandez, Respite, Rest &amp; Recovery Home<br>
-              3. Kern Medical Center
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Service">Short-Term Post-Hospitalization</td>
-            <td data-label="Description">Temporary shelter while recovering from a procedure/illness, plus assistance in gaining housing for greater independence.</td>
-            <td data-label="Contracted Providers">
-              1. Papo Hernandez, Respite, Rest &amp; Recovery Home<br>
-              2. Good Samaritan Healing Center (Bakersfield &amp; Delano)
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Service">Asthma Remediation</td>
-            <td data-label="Description">Home modifications (e.g., air purifiers) to support a healthy lifestyle for members living with asthma.</td>
-            <td data-label="Contracted Providers">
-              1. Central California Asthma Collaborative<br>
-              2. SD Consulting (Bakersfield &amp; Delano)<br>
-              3. Mercy Hospital
-            </td>
+            <td>Housing Tenancy &amp; Sustaining Services</td>
+            <td>Provides education and resources to prevent loss of housing, including tenant-landlord rights and identifying lease violations (e.g., hoarding).</td>
+            <td>Same providers as above (1–8).</td>
           </tr>
         </tbody>
       </table>
@@ -249,26 +148,20 @@
     <!-- ============ 1 JAN 2023 =================================== -->
     <section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
       <table>
-        <thead>
-          <tr>
-            <th>Service</th>
-            <th>Description</th>
-            <th>Contracted Providers</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
         <tbody>
           <tr>
-            <td data-label="Service">Respite Services</td>
-            <td data-label="Description">Short-term, non-medical supervision for members when the primary caregiver is absent or needs relief.</td>
-            <td data-label="Contracted Providers">
+            <td>Respite Services</td>
+            <td>Short-term, non-medical supervision for members when the primary caregiver is absent or needs relief.</td>
+            <td>
               1. 24 Hour Home Care<br>
               2. SD Healthcare Consulting (2 locations)
             </td>
           </tr>
           <tr>
-            <td data-label="Service">Medically Tailored Meals / Supportive Food</td>
-            <td data-label="Description">Healthy meals or nutrition counseling for members with chronic conditions.</td>
-            <td data-label="Contracted Providers">
+            <td>Medically Tailored Meals / Supportive Food</td>
+            <td>Healthy meals or nutrition counseling for members with chronic conditions.</td>
+            <td>
               1. GA Food Services<br>
               2. Modify Health<br>
               3. PurFoods LLC dba Mom’s Meals<br>
@@ -278,9 +171,9 @@
             </td>
           </tr>
           <tr>
-            <td data-label="Service">Sobering Centers</td>
-            <td data-label="Description">Alternative destination for publicly intoxicated individuals, avoiding ER or jail transports.</td>
-            <td data-label="Contracted Providers">
+            <td>Sobering Centers</td>
+            <td>Alternative destination for publicly intoxicated individuals, avoiding ER or jail transports.</td>
+            <td>
               1. Kern Behavioral Health &amp; Recovery Services<br>
               2. CityServe Network (2 locations)
             </td>
@@ -292,31 +185,25 @@
     <!-- ============ 1 JUL 2023 =================================== -->
     <section class="panel" id="p2" role="tabpanel" aria-labelledby="t2">
       <table>
-        <thead>
-          <tr>
-            <th>Service</th>
-            <th>Description</th>
-            <th>Contracted Providers</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
         <tbody>
           <tr>
-            <td data-label="Service">Nursing Facility Transition / Diversion to Assisted Living Facilities</td>
-            <td data-label="Description">Helps individuals live in the community and avoid institutionalization; supports transitions back to home-like settings.</td>
-            <td data-label="Contracted Providers">
+            <td>Nursing Facility Transition / Diversion to Assisted Living Facilities</td>
+            <td>Helps individuals live in the community and avoid institutionalization; supports transitions back to home-like settings.</td>
+            <td>
               1. Bakersfield Community Healthcare<br>
               2. Pathway Assisted Living
             </td>
           </tr>
           <tr>
-            <td data-label="Service">Community Transition Services / Nursing Facility Transition to a Home</td>
-            <td data-label="Description">Financial assistance (up to $7,500) and information for members moving from medical facilities back to their own homes.</td>
-            <td data-label="Contracted Providers">Same as above (1–2).</td>
+            <td>Community Transition Services / Nursing Facility Transition to a Home</td>
+            <td>Financial assistance (up to $7,500) and information for members moving from medical facilities back to their own homes.</td>
+            <td>Same as above (1–2).</td>
           </tr>
           <tr>
-            <td data-label="Service">Personal Care &amp; Homemaker Services</td>
-            <td data-label="Description">Support with ADLs such as bathing, dressing, toileting and feeding.</td>
-            <td data-label="Contracted Providers">
+            <td>Personal Care &amp; Homemaker Services</td>
+            <td>Support with ADLs such as bathing, dressing, toileting and feeding.</td>
+            <td>
               1. 24 Hour Home Care<br>
               2. SD Healthcare Consulting (2 locations)
             </td>
@@ -328,18 +215,12 @@
     <!-- ============ 1 JAN 2024 =================================== -->
     <section class="panel" id="p3" role="tabpanel" aria-labelledby="t3">
       <table>
-        <thead>
-          <tr>
-            <th>Service</th>
-            <th>Description</th>
-            <th>Contracted Providers</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
         <tbody>
           <tr>
-            <td data-label="Service">Day Habilitation Programs</td>
-            <td data-label="Description">Non-facility programs that build self-help and adaptive skills for successful community living.</td>
-            <td data-label="Contracted Providers">
+            <td>Day Habilitation Programs</td>
+            <td>Non-facility programs that build self-help and adaptive skills for successful community living.</td>
+            <td>
               1. Good Samaritan Healing Center (2 locations)<br>
               2. CAPK<br>
               3. Kern Psychiatric Wellness Center
@@ -352,19 +233,46 @@
     <!-- ============ 1 JUL 2024 =================================== -->
     <section class="panel" id="p4" role="tabpanel" aria-labelledby="t4">
       <table>
-        <thead>
-          <tr>
-            <th>Service</th>
-            <th>Description</th>
-            <th>Contracted Providers</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
         <tbody>
           <tr>
-            <td data-label="Service">Environmental Accessibility Adaptation</td>
-            <td data-label="Description">Physical home modifications (“home mods”) necessary to ensure the member’s well-being.</td>
-            <td data-label="Contracted Providers">
-              1. Habitat for Humanity
+            <td>Environmental Accessibility Adaptation</td>
+            <td>Physical home modifications (“home mods”) necessary to ensure the member’s well-being.</td>
+            <td>1. Habitat for Humanity</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============ 1 JAN 2022 (continued) ======================= -->
+    <section class="panel" id="p5" role="tabpanel" aria-labelledby="t5">
+      <table>
+        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Recuperative Care (Medical Respite)</td>
+            <td>Short-term residential care post-hospitalization, including transport to appointments plus food and housing assistance.</td>
+            <td>
+              1. Good Samaritan Healing Center (Bakersfield &amp; Delano)<br>
+              2. Papo Hernandez, Respite, Rest &amp; Recovery Home<br>
+              3. Kern Medical Center
+            </td>
+          </tr>
+          <tr>
+            <td>Short-Term Post-Hospitalization</td>
+            <td>Temporary shelter while recovering from a procedure/illness, plus assistance in gaining housing for greater independence.</td>
+            <td>
+              1. Papo Hernandez, Respite, Rest &amp; Recovery Home<br>
+              2. Good Samaritan Healing Center (Bakersfield &amp; Delano)
+            </td>
+          </tr>
+          <tr>
+            <td>Asthma Remediation</td>
+            <td>Home modifications (e.g., air purifiers) to support a healthy lifestyle for members living with asthma.</td>
+            <td>
+              1. Central California Asthma Collaborative<br>
+              2. SD Consulting (Bakersfield &amp; Delano)<br>
+              3. Mercy Hospital
             </td>
           </tr>
         </tbody>
@@ -379,14 +287,15 @@
 
     tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
 
-    document.querySelector('.tabs').addEventListener('keydown', e => {
+    // arrow-key navigation
+    document.querySelector('.tabs').addEventListener('keydown', e=>{
       const i = tabs.indexOf(document.activeElement);
       if (i < 0) return;
       if (e.key === 'ArrowRight') tabs[(i + 1) % tabs.length].focus();
       if (e.key === 'ArrowLeft')  tabs[(i + tabs.length - 1) % tabs.length].focus();
     });
 
-    function activateTab(tab) {
+    function activateTab(tab){
       tabs.forEach(t => t.setAttribute('aria-selected', t === tab));
       panels.forEach(p =>
         p.toggleAttribute('data-active',
