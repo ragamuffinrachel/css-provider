@@ -4,7 +4,7 @@
   color: var(--text);
   padding: 1.5rem;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: transparent;
   max-width: 900px;
   margin: 0 auto;
 }
