@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Contact Widget</title>
+  <!-- Typekit for Termina Light -->
+  <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent:  #8BA4D5;
+      --text:    #2B2B2B;
+      --bg:      #FFFFFF;
+      --radius:  8px;
+      --shadow:  0 1px 3px rgba(0,0,0,0.1);
+    }
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+    }
+    .widget {
+      max-width: 800px;
+      width: 100%;
+      background: var(--bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 1.5rem;
+    }
+    .widget h2 {
+      margin: 0;
+      font-family: 'termina-300', sans-serif;
+      font-size: 2rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.5rem;
+    }
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .contact-section, .staff-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-section h3,
+    .staff-section h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.25rem;
+    }
+    .contact-section p,
+    .staff-item p {
+      margin: 0;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    .contact-section a,
+    .staff-item a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .contact-section a:hover,
+    .staff-item a:hover {
+      text-decoration: underline;
+    }
+    .staff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .staff-item {
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 0.75rem;
+      box-shadow: var(--shadow);
+    }
+    .staff-item strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="widget">
+    <h2>Questions?</h2>
+    <div class="content">
+      <div class="contact-section">
+        <h3>Team Contact</h3>
+        <p><strong>KHS Community Support Services Team</strong></p>
+        <p>661‑632‑1590 (Bakersfield area)<br>
+           1‑800‑391‑2000 (outside Bakersfield)<br>
+           Option 6 at prompt &middot; Ext. 5916</p>
+        <p><a href="mailto:CSSTeam@khs-net.com">CSSTeam@khs-net.com</a></p>
+      </div>
+      <div class="staff-section">
+        <h3>Key Staff</h3>
+        <div class="staff-list">
+          <div class="staff-item">
+            <strong>Adriana Salinas</strong>
+            <p>Director of Community &amp; Social Services</p>
+            <p><a href="mailto:Adriana.Salinas@khs-net.com">Adriana.Salinas@khs-net.com</a></p>
+            <p>Office: 661‑426‑7711</p>
+          </div>
+          <div class="staff-item">
+            <strong>Dalia Fontaine</strong>
+            <p>Community &amp; Social Services Manager</p>
+            <p><a href="mailto:Dalia.Fontaine@khs-net.com">Dalia.Fontaine@khs-net.com</a></p>
+            <p>Office: 661‑426‑7729</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
