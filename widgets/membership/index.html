@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSS Membership &amp; Services Growth</title>
+
+  <!-- Typekit for Termina Light -->
+  <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent:  #8BA4D5;
+      --text:    #2B2B2B;
+      --bg:      #FFFFFF;
+      --stripe:  #F5F7FA;
+      --radius:  6px;
+      --shadow:  0 1px 3px rgba(0,0,0,.1);
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'termina-300', 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+    }
+
+    .widget {
+      max-width: 960px;
+      width: 100%;
+      background: var(--bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+    }
+
+    .widget h2 {
+      margin: 0 0 1rem;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    .charts {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .chart-container {
+      flex: 1 1 280px;
+      background: var(--stripe);
+      padding: 1rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .chart-container h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Ensure canvas blocks take full width */
+    .chart-container canvas {
+      width: 100% !important;
+      height: 260px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="widget">
+    <h2>CSS Membership and Services Growth</h2>
+    <div class="charts">
+      <div class="chart-container">
+        <h3>Members</h3>
+        <canvas id="membersChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Services</h3>
+        <canvas id="servicesChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // common data
+    const years = ['2022','2023','2024'];
+    const members = [764, 3629, 4465];
+    const services = [2236, 16658, 26552];
+
+    // create a peach‑orange gradient
+    function makeGradient(ctx) {
+      const grad = ctx.createLinearGradient(0, 0, 0, 260);
+      grad.addColorStop(0, '#F9B38C');
+      grad.addColorStop(1, '#F4A377');
+      return grad;
+    }
+
+    function buildChart(ctxId, data) {
+      const ctx = document.getElementById(ctxId).getContext('2d');
+      return new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: years,
+          datasets: [{
+            data,
+            backgroundColor: makeGradient(ctx),
+            borderRadius: 4,
+            barPercentage: 0.6
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(0,0,0,0.7)',
+              titleFont:   { family: 'Montserrat', size: 12 },
+              bodyFont:    { family: 'Montserrat', size: 12 }
+            }
+          },
+          scales: {
+            x: {
+              grid:        { display: false },
+              ticks:       { font: { family: 'Montserrat', size: 12 } }
+            },
+            y: {
+              grid:        { color: '#eee' },
+              ticks:       { font: { family: 'Montserrat', size: 12 }, beginAtZero: true }
+            }
+          }
+        }
+      });
+    }
+
+    // render both charts
+    buildChart('membersChart', members);
+    buildChart('servicesChart', services);
+  </script>
+</body>
+</html>
