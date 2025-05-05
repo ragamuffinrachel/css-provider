@@ -65,13 +65,18 @@
     }
 
     .chart-container h3 {
-      margin: 0 0 0.5rem;
+      margin: 0;
       font-size: 1.2rem;
       font-weight: 600;
       color: var(--text);
     }
+    .chart-container .subtitle {
+      margin: 0.25rem 0 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text);
+    }
 
-    /* Ensure canvas blocks take full width */
     .chart-container canvas {
       width: 100% !important;
       height: 260px !important;
@@ -81,28 +86,31 @@
 <body>
 
   <div class="widget">
-    <h2>CSS Membership and Services Growth</h2>
     <div class="charts">
       <div class="chart-container">
         <h3>Members</h3>
+        <p class="subtitle">Community Support Services Members Enrolled Year Totals<br>2022 - 2024 YTD</p>
         <canvas id="membersChart"></canvas>
       </div>
       <div class="chart-container">
         <h3>Services</h3>
+        <p class="subtitle">Community Support Services Provided Year Totals<br>2022 - 2024 YTD</p>
         <canvas id="servicesChart"></canvas>
       </div>
     </div>
   </div>
 
-  <!-- Chart.js CDN -->
+  <!-- Chart.js & DataLabels -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script>
-    // common data
+    // register plugin
+    Chart.register(ChartDataLabels);
+
     const years = ['2022','2023','2024'];
     const members = [764, 3629, 4465];
     const services = [2236, 16658, 26552];
 
-    // create a peach‑orange gradient
     function makeGradient(ctx) {
       const grad = ctx.createLinearGradient(0, 0, 0, 260);
       grad.addColorStop(0, '#F9B38C');
@@ -125,29 +133,26 @@
         },
         options: {
           maintainAspectRatio: false,
+          hover: { mode: null },           // disable hover highlight
           plugins: {
             legend: { display: false },
-            tooltip: {
-              backgroundColor: 'rgba(0,0,0,0.7)',
-              titleFont:   { family: 'Montserrat', size: 12 },
-              bodyFont:    { family: 'Montserrat', size: 12 }
+            tooltip: { enabled: false },    // disable tooltips
+            datalabels: {
+              color: 'var(--text)',
+              font: { family: 'Montserrat', weight: '600', size: 12 },
+              anchor: 'end',
+              align: 'start',
+              offset: 4
             }
           },
           scales: {
-            x: {
-              grid:        { display: false },
-              ticks:       { font: { family: 'Montserrat', size: 12 } }
-            },
-            y: {
-              grid:        { color: '#eee' },
-              ticks:       { font: { family: 'Montserrat', size: 12 }, beginAtZero: true }
-            }
+            x: { grid: { display: false }, ticks: { font: { family: 'Montserrat', size: 12 } } },
+            y: { grid: { color: '#eee' }, ticks: { font: { family: 'Montserrat', size: 12 }, beginAtZero: true } }
           }
         }
       });
     }
 
-    // render both charts
     buildChart('membersChart', members);
     buildChart('servicesChart', services);
   </script>
