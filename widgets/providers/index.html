@@ -20,7 +20,7 @@
     }
     body {
       margin: 0;
-      padding: 2rem;
+      padding: 1.5rem;
       font-family: 'termina-300', 'Montserrat', sans-serif;
       background: var(--bg);
       color: var(--text);
@@ -32,15 +32,15 @@
       width: 100%;
     }
     .grid-title {
-      margin-bottom: 1rem;
-      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.5rem;
       color: var(--accent);
       text-align: center;
     }
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(7, minmax(140px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(7, minmax(120px, 1fr));
+      gap: 0.5rem 0.75rem;
       justify-items: center;
     }
     .card {
@@ -48,14 +48,14 @@
       background: var(--stripe);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 1rem;
+      padding: 0.75rem;
       text-align: center;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 80px;
+      min-height: 60px;
       width: 100%;
       box-sizing: border-box;
       overflow: hidden;
@@ -68,18 +68,24 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 50%;
+      height: 40%;
       background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0) 80%);
       border-top-left-radius: var(--radius);
       border-top-right-radius: var(--radius);
       pointer-events: none;
     }
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
     .card.invisible {
       visibility: hidden;
+    }
+    @media (max-width: 800px) {
+      .card-grid {
+        grid-template-columns: repeat(5, minmax(100px, 1fr));
+      }
+      .grid-title { font-size: 1.25rem; }
     }
   </style>
 </head>
