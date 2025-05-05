@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSS Success Story Widget</title>
+
+  <!-- Typekit for Termina Light -->
+  <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent:  #8BA4D5;
+      --text:    #2B2B2B;
+      --bg:      #FFFFFF;
+      --stripe:  #F5F7FA;
+      --radius:  6px;
+      --shadow:  0 1px 3px rgba(0,0,0,.1);
+    }
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'termina-300', 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+    }
+    .widget {
+      max-width: 800px;
+      width: 100%;
+      padding: 2rem;
+      background: var(--bg);
+      border-left: 4px solid var(--accent);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .widget h2 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--text);
+      text-align: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--stripe);
+    }
+    .story-content {
+      margin-top: 1rem;
+    }
+    .story-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      text-align: justify;
+    }
+    .pull-quote {
+      float: right;
+      width: 35%;
+      min-width: 180px;
+      margin: 0 0 1rem 1rem;
+      background: var(--accent);
+      color: #ffffff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .pull-quote .decor-line {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+    .pull-quote .decor-line .line {
+      flex: 1;
+      height: 1px;
+      background: #ffffff;
+    }
+    .pull-quote .decor-line .heart {
+      margin: 0 0.5rem;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    .story-content::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    .next-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: none;
+      color: var(--accent);
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+    @media (max-width: 600px) {
+      .pull-quote {
+        float: none;
+        width: 100%;
+        margin: 0 0 1rem;
+      }
+      .next-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="widget">
+    
+      <button class="next-btn" id="nextBtn" aria-label="Next">›</button>
+    
+    <div class="story-content">
+      <div class="pull-quote" id="storyQuote">
+        <div class="decor-line"><div class="line"></div><div class="heart">❤</div><div class="line"></div></div>
+        <div id="quoteText"></div>
+        <div class="decor-line"><div class="line"></div><div class="heart">❤</div><div class="line"></div></div>
+      </div>
+      <div class="story-text" id="storyText"></div>
+    </div>
+  </div>
+
+  <script>
+    const stories = [
+      {
+        text: `Diagnosed with autism in early childhood, the member now relies on his mother for assistance with daily living activities. As an adult, he was referred to Community Support Services to address multiple needs, including asthma management, personal care and homemaker services, and respite support for his primary caregiver. Through coordinated services provided by SD Healthcare, the member has experienced improved health outcomes, including the prevention of asthma-related hospitalizations. Additionally, respite care allows his mother to maintain her own health and well-being, reducing caregiver burnout.`,
+        quote: `My family would not be able to thrive without these wonderful services.`
+      },
+      {
+        text: `The member has been an active participant in the CalAIM Program with Community Action Partnership of Kern (CAPK) since 2024. She is a shining example of resilience and determination, proving that past challenges do not define one's future. Despite facing obstacles due to high income requirements and her rental history, the member refused to let those barriers stand in the way of building a better life for herself and her family. With the support of the CalAIM CAPK program, the member was connected with a compassionate landlord who welcomed her family—including their beloved pet—into a safe and stable home. Today, she and her children thrive in a fantastic school district, their family pet enjoys a spacious yard to roam, and, most importantly, she has the security and peace of mind that comes with stable housing.`,
+        quote: `Stable housing gave us a foundation to rebuild our lives—now we feel hopeful again.`
+      }
+    ];
+    let current = 0;
+    const textEl = document.getElementById('storyText');
+    const quoteEl = document.getElementById('quoteText');
+    const btn = document.getElementById('nextBtn');
+
+    function renderStory(idx) {
+      textEl.textContent = stories[idx].text;
+      quoteEl.textContent = `“${stories[idx].quote}”`;
+    }
+
+    btn.addEventListener('click', () => {
+      current = (current + 1) % stories.length;
+      renderStory(current);
+    });
+
+    // init
+    renderStory(current);
+  </script>
+</body>
+</html>
