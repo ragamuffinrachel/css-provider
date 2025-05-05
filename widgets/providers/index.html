@@ -2,53 +2,132 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>CSS Contracted Providers Widget</title>
-
+  <title>26-Card Centered Grid</title>
   <!-- Typekit for Termina Light -->
   <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
   <!-- Google Fonts: Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <!-- shared variables & resets -->
-  <link rel="stylesheet" href="../../assets/global.css">
-  <!-- only this widget’s unique styles -->
-  <link rel="stylesheet" href="providers.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent:  #8BA4D5;
+      --text:    #2B2B2B;
+      --bg:      #FFFFFF;
+      --stripe:  #F5F7FA;
+      --radius:  6px;
+      --shadow:  0 2px 4px rgba(0,0,0,0.1);
+    }
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'termina-300', 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+    }
+    .grid-widget {
+      max-width: 1000px;
+      width: 100%;
+    }
+    .grid-title {
+      margin-bottom: 1rem;
+      font-size: 1.75rem;
+      color: var(--accent);
+      text-align: center;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(140px, 1fr));
+      gap: 1rem;
+      justify-items: center;
+    }
+    .card {
+      position: relative;
+      background: var(--stripe);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80px;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    /* Shiny gloss overlay */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0) 80%);
+      border-top-left-radius: var(--radius);
+      border-top-right-radius: var(--radius);
+      pointer-events: none;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .card.invisible {
+      visibility: hidden;
+    }
+  </style>
 </head>
 <body>
-  <div class="widget">
-    <div class="providers-grid">
-      <div class="provider-card">24Hr Homecare</div>
-      <div class="provider-card">Bakersfield Community Health Center</div>
-      <div class="provider-card">Community Action Partnership of Kern</div>
-      <div class="provider-card">Central California Asthma Collaborative</div>
-      <div class="provider-card">CityServe Network</div>
-      <div class="provider-card">Community Wellness Program / Mercy Hospital</div>
-      <div class="provider-card">EA Family Services</div>
-      <div class="provider-card">GA Foods</div>
-      <div class="provider-card">Good Samaritan Healing Center</div>
-      <div class="provider-card">Habitat for Humanity</div>
-      <div class="provider-card">Housing Authority of the County of Kern</div>
-      <div class="provider-card">Hunger Not Impossible / Bento</div>
-      <div class="provider-card">Kern BHRS</div>
-      <div class="provider-card">Kern Hospital Authority (KMC)</div>
-      <div class="provider-card">Mercy House Living Centers</div>
-      <div class="provider-card">Modify Health</div>
-      <div class="provider-card">PurFoods LLC / Moms Meals</div>
-      <div class="provider-card">The Open Door Network</div>
-      <div class="provider-card">Corbow Inc / Papo Hernandez</div>
-      <div class="provider-card">Sunterra Inc / Project Food Box</div>
-      <div class="provider-card">Roots Food Group</div>
-      <div class="provider-card">SD Healthcare</div>
-      <div class="provider-card">St. Vincent Preventative Care</div>
-      <div class="provider-card">The Mission of Kern County / Bakersfield Rescue Mission</div>
-      <div class="provider-card">Pathway Assisted Living Center</div>
-      <div class="provider-card">Kern Psychiatric Wellness Center</div>
-    </div>
+  <div class="grid-widget">
+    <div class="card-grid" id="cardGrid"></div>
   </div>
+  <script>
+    const names = [
+      "24Hr Homecare",
+      "Bakersfield Community Health Center",
+      "Community Action Partnership of Kern",
+      "Central California Asthma Collaborative",
+      "CityServe Network",
+      "Community Wellness Program / Mercy Hospital",
+      "EA Family Services",
+      "GA Foods",
+      "Good Samaritan Healing Center",
+      "Habitat for Humanity",
+      "Housing Authority of the County of Kern",
+      "Hunger Not Impossible / Bento",
+      "Kern BHRS",
+      "Kern Hospital Authority (KMC)",
+      "Mercy House Living Centers",
+      "Modify Health",
+      "PurFoods LLC / Moms Meals",
+      "The Open Door Network",
+      "Corbow Inc / Papo Hernandez",
+      "Sunterra Inc / Project Food Box",
+      "Roots Food Group",
+      "SD Healthcare",
+      "St. Vincent Preventative Care",
+      "The Mission of Kern County / Bakersfield Rescue Mission",
+      "Pathway Assisted Living Center",
+      "Kern Psychiatric Wellness Center"
+    ];
+    const grid = document.getElementById('cardGrid');
+    for (let pos = 1; pos <= 28; pos++) {
+      const cell = document.createElement('div');
+      cell.className = 'card';
+      if (pos === 22 || pos === 28) {
+        cell.classList.add('invisible');
+      } else {
+        const idx = pos < 22 ? pos - 1 : pos - 2;
+        cell.textContent = names[idx];
+      }
+      grid.appendChild(cell);
+    }
+  </script>
 </body>
 </html>
