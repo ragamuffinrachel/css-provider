@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Graphic Dividers</title>
+  <!-- Typekit for Termina Light -->
+  <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent:  #8BA4D5;
+      --text:    #2B2B2B;
+      --bg:      #FFFFFF;
+      --stripe:  #F5F7FA;
+      --radius:  6px;
+      --shadow:  0 1px 3px rgba(0,0,0,.1);
+    }
+    body {
+      margin: 2rem;
+      font-family: 'termina-300', 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    /* Basic bars */
+    .divider-solid { height: 4px; background: var(--accent); border: none; border-radius: 2px; margin: 2rem 0; }
+    .divider-double { border: none; border-top: 3px double var(--accent); margin: 2rem 0; }
+    /* Dashed & Dotted */
+    .divider-dashed { border-top: 2px dashed var(--accent); margin: 2rem 0; }
+    .divider-dotted { border-top: 2px dotted var(--accent); margin: 2rem 0; }
+    /* Stripes & Gradients */
+    .divider-striped { height: 8px; background: repeating-linear-gradient(45deg, var(--accent), var(--accent) 5px, var(--stripe) 5px, var(--stripe) 10px); border-radius: 4px; margin: 2rem 0; }
+    .divider-gradient { height: 6px; background: linear-gradient(to right, var(--accent), var(--stripe), var(--accent)); border-radius: 3px; margin: 2rem 0; }
+    /* Icon centered */
+    .divider-icon { display: flex; align-items: center; margin: 2rem 0; }
+    .divider-icon::before, .divider-icon::after { content: ''; flex: 1; border-top: 1px solid var(--accent); }
+    .divider-icon span { margin: 0 1rem; font-size: 1.2rem; color: var(--accent); }
+    /* Zigzag SVG */
+    .divider-zigzag { margin: 2rem 0; width: 100%; height: 20px; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='20'><polyline points='0,10 10,0 20,10 30,0 40,10 50,0 60,10 70,0 80,10 90,0 100,10' fill='none' stroke='%238BA4D5' stroke-width='2'/></svg>") repeat-x; }
+    /* Scalloped */
+    .divider-scallop { margin: 2rem 0; width: 100%; height: 20px; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='20'><circle cx='10' cy='10' r='10' fill='%238BA4D5'/></svg>") repeat-x; }
+    /* Arrowheads */
+    .divider-arrow { margin: 2rem 0; display: flex; justify-content: center; align-items: center; }
+    .divider-arrow::before, .divider-arrow::after { content: ''; flex: 1; border-top: 1px solid var(--accent); }
+    .divider-arrow span { margin: 0 0.5rem; display: inline-block; transform: rotate(90deg); font-size: 1rem; color: var(--accent); }
+    /* Clearfix */
+    hr { display: block; }
+  </style>
+</head>
+<body>
+  <h1>Graphic Dividers</h1>
+  <p>Above a solid bar divider.</p>
+  <hr class="divider-solid" />
+
+  <p>Followed by a double-line divider.</p>
+  <hr class="divider-double" />
+
+  <p>And a gradient bar divider.</p>
+  <div class="divider-gradient"></div>
+
+  <p>Introducing zigzag edge divider.</p>
+  <div class="divider-zigzag"></div>
+
+  <p>Then a scalloped-edge divider.</p>
+  <div class="divider-scallop"></div>
+
+  <p>Icon-centered star divider.</p>
+  <div class="divider-icon"><span>★</span></div>
+
+  <p>Simple dashed and dotted.</p>
+  <hr class="divider-dashed" />
+  <hr class="divider-dotted" />
+
+  <p>Striped and wavy styles.</p>
+  <div class="divider-striped"></div>
+  <div class="divider-wave"></div>
+
+  <p>Arrowhead centered decoration.</p>
+  <div class="divider-arrow"><span>›</span></div>
+</body>
+</html>
