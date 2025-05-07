@@ -21,16 +21,19 @@
       --shadow:  0 1px 3px rgba(0,0,0,.1);
     }
 
+    /* 1. Make the page background transparent */
+    html,
     body {
       margin: 0;
       padding: 2rem;
       font-family: 'termina-300', 'Montserrat', sans-serif;
-      background: var(--bg);
+      background: transparent;
       color: var(--text);
       display: flex;
       justify-content: center;
     }
 
+    /* 2. Keep the widget and its internal panels styled as before */
     .widget {
       max-width: 960px;
       width: 100%;
@@ -89,12 +92,18 @@
     <div class="charts">
       <div class="chart-container">
         <h3>Members</h3>
-        <p class="subtitle">Community Support Services Members Enrolled Year Totals<br>2022 - 2024 YTD</p>
+        <p class="subtitle">
+          Community Support Services Members Enrolled Year Totals<br>
+          2022 - 2024 YTD
+        </p>
         <canvas id="membersChart"></canvas>
       </div>
       <div class="chart-container">
         <h3>Services</h3>
-        <p class="subtitle">Community Support Services Provided Year Totals<br>2022 - 2024 YTD</p>
+        <p class="subtitle">
+          Community Support Services Provided Year Totals<br>
+          2022 - 2024 YTD
+        </p>
         <canvas id="servicesChart"></canvas>
       </div>
     </div>
@@ -107,8 +116,8 @@
     // register plugin
     Chart.register(ChartDataLabels);
 
-    const years = ['2022','2023','2024'];
-    const members = [764, 3629, 4465];
+    const years    = ['2022','2023','2024'];
+    const members  = [764, 3629, 4465];
     const services = [2236, 16658, 26552];
 
     function makeGradient(ctx) {
@@ -133,16 +142,16 @@
         },
         options: {
           maintainAspectRatio: false,
-          hover: { mode: null },           // disable hover highlight
+          hover: { mode: null },
           plugins: {
-            legend: { display: false },
-            tooltip: { enabled: false },    // disable tooltips
+            legend:  { display: false },
+            tooltip: { enabled: false },
             datalabels: {
-              color: 'var(--text)',
-              font: { family: 'Montserrat', weight: '600', size: 12 },
-              anchor: 'end',
-              align: 'start',
-              offset: 4
+              color:    'var(--text)',
+              font:     { family: 'Montserrat', weight: '600', size: 12 },
+              anchor:   'end',
+              align:    'start',
+              offset:   4
             }
           },
           scales: {
