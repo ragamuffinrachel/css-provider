@@ -13,20 +13,25 @@
     :root {
       --accent:  #8BA4D5;
       --text:    #2B2B2B;
-      --bg:      #FFFFFF;
+      --bg:      transparent;
       --stripe:  #F5F7FA;
       --radius:  6px;
       --shadow:  0 2px 4px rgba(0,0,0,0.1);
     }
+
+    /* 1. Make the overall page background transparent */
+    html,
     body {
       margin: 0;
       padding: 1.5rem;
       font-family: 'termina-300', 'Montserrat', sans-serif;
-      background: var(--bg);
+      background: transparent;
       color: var(--text);
       display: flex;
       justify-content: center;
     }
+
+    /* 2. Keep your grid‑widget and cards styled exactly as before */
     .grid-widget {
       width: fit-content;
       margin: 0 auto;
@@ -90,14 +95,19 @@
       .card-grid {
         grid-template-columns: repeat(5, minmax(100px, 1fr));
       }
-      .grid-title { font-size: 1.25rem; }
+      .grid-title {
+        font-size: 1.25rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="grid-widget">
+    <!-- Optional title -->
+    <!-- <div class="grid-title">Our Partners</div> -->
     <div class="card-grid" id="cardGrid"></div>
   </div>
+
   <script>
     const names = [
       "24Hr Homecare",
