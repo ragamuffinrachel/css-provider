@@ -20,15 +20,28 @@
       --radius:  6px;
       --shadow:  0 1px 3px rgba(0,0,0,.1);
     }
+
+    /* 1. Make page‑level background transparent */
+    html,
     body {
       margin: 0;
       padding: 2rem;
       font-family: 'termina-300', 'Montserrat', sans-serif;
-      background: var(--bg);
+      background: transparent;
       color: var(--text);
       display: flex;
       justify-content: center;
     }
+
+    /* 2. Hide or transparent-ize the divider outside the widget */
+    .divider-gradient {
+      background: transparent;
+      /* Or to remove it entirely: display: none; */
+      height: 6px;
+      margin: 2rem 0;
+    }
+
+    /* 3. Keep the widget itself white */
     .widget {
       max-width: 800px;
       width: 100%;
@@ -38,6 +51,7 @@
       box-shadow: var(--shadow);
       position: relative;
     }
+
     .widget h2 {
       margin: 0;
       font-size: 2rem;
@@ -47,6 +61,7 @@
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--stripe);
     }
+
     .story-content {
       margin-top: 1rem;
     }
@@ -106,6 +121,7 @@
       line-height: 1;
       padding: 0;
     }
+
     @media (max-width: 600px) {
       .pull-quote {
         float: none;
@@ -116,21 +132,31 @@
         top: 0.5rem;
         right: 0.5rem;
       }
-      .divider-gradient { height: 6px; background: linear-gradient(to right, var(--accent), var(--stripe), var(--accent)); border-radius: 3px; margin: 2rem 0;
+      /* hide the divider on small screens */
+      .divider-gradient {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
   <div class="divider-gradient"></div>
+
   <div class="widget">
-    
-      <button class="next-btn" id="nextBtn" aria-label="Next">›</button>
-    
+    <button class="next-btn" id="nextBtn" aria-label="Next">›</button>
     <div class="story-content">
       <div class="pull-quote" id="storyQuote">
-        <div class="decor-line"><div class="line"></div><div class="heart">❤</div><div class="line"></div></div>
+        <div class="decor-line">
+          <div class="line"></div>
+          <div class="heart">❤</div>
+          <div class="line"></div>
+        </div>
         <div id="quoteText"></div>
-        <div class="decor-line"><div class="line"></div><div class="heart">❤</div><div class="line"></div></div>
+        <div class="decor-line">
+          <div class="line"></div>
+          <div class="heart">❤</div>
+          <div class="line"></div>
+        </div>
       </div>
       <div class="story-text" id="storyText"></div>
     </div>
