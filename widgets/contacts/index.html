@@ -17,26 +17,32 @@
       --radius:  8px;
       --shadow:  0 1px 3px rgba(0,0,0,0.1);
     }
+
+    /* Make the page background transparent */
+    html,
     body {
       margin: 0;
       padding: 2rem;
       font-family: 'Montserrat', sans-serif;
-      background: var(--bg);
+      background: transparent;
       color: var(--text);
       display: flex;
       justify-content: center;
     }
+
+    /* Ensure the widget itself stays white */
     .widget {
       max-width: 800px;
       width: 100%;
       background: var(--bg);
       border-radius: var(--radius);
-      box-shadow: transparent;
+      box-shadow: var(--shadow);
       padding: 1.5rem;
       display: grid;
       grid-template-rows: auto 1fr;
       gap: 1.5rem;
     }
+
     .widget h2 {
       margin: 0;
       font-family: 'termina-300', sans-serif;
@@ -96,6 +102,7 @@
       margin-bottom: 0.25rem;
       font-weight: 600;
     }
+
     @media (max-width: 600px) {
       .content {
         grid-template-columns: 1fr;
@@ -110,9 +117,11 @@
       <div class="contact-section">
         <h3>Team Contact</h3>
         <p><strong>KHS Community Support Services Team</strong></p>
-        <p>661‑632‑1590 (Bakersfield area)<br>
-           1‑800‑391‑2000 (outside Bakersfield)<br>
-           Option 6 at prompt &middot; Ext. 5916</p>
+        <p>
+          661‑632‑1590 (Bakersfield area)<br>
+          1‑800‑391‑2000 (outside Bakersfield)<br>
+          Option 6 at prompt · Ext. 5916
+        </p>
         <p><a href="mailto:CSSTeam@khs-net.com">CSSTeam@khs-net.com</a></p>
       </div>
       <div class="staff-section">
