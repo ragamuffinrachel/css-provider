@@ -17,21 +17,21 @@
       --radius:  8px;
       --shadow:  0 1px 3px rgba(0,0,0,0.1);
     }
+    *, *::before, *::after { box-sizing: border-box; }
 
-    /* Page layout: stack h2 + widget, center horizontally */
-    html,
-    body {
+    /* Page layout: stack header + widget, center */
+    html, body {
       margin: 0;
       padding: 2rem;
-      font-family: 'Montserrat', sans-serif;
       background: transparent;
       color: var(--text);
+      font-family: 'Montserrat', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Termina black header with purple bar */
+    /* Termina page-level heading */
     .section-heading {
       position: relative;
       display: inline-block;
@@ -43,17 +43,17 @@
       color: #000;
       text-align: center;
     }
-    .section‑heading::before {
+    .section-heading::before {
       content: '';
       display: block;
-      width: 50px;                  /* length of the bar */
-      height: 4px;                  /* thickness of the bar */
-      background: var(--accent);
+      width: 50px;
+      height: 4px;
+      background: #957db5;
       border-radius: 2px;
-      margin: 0 auto 0.75rem;       /* center & gap below bar */
+      margin: 0 auto 0.75rem;
     }
 
-    /* Ensure the widget itself stays white */
+    /* Widget container */
     .widget {
       max-width: 800px;
       width: 100%;
@@ -66,10 +66,12 @@
       gap: 1.5rem;
     }
 
+    /* Inner widget heading (optional) */
     .widget h2 {
-      /* if you still want a heading inside, style it here */
       margin: 0;
-      font-family: 'termina-300', sans-serif;
+      font-family: 'termina', sans-serif;
+      font-weight: 300;
+      font-style: normal;
       font-size: 2rem;
       color: var(--accent);
       border-bottom: 2px solid var(--accent);
@@ -136,17 +138,15 @@
     }
 
     @media (max-width: 600px) {
-      .content {
-        grid-template-columns: 1fr;
-      }
+      .content { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <!-- Section header with Termina, black text, purple bar -->
-  <h2 class="section‑heading">Questions &amp; Contacts</h2>
+  <!-- Page heading -->
+  <h2 class="section-heading">Questions &amp; Contacts</h2>
 
-  <!-- Your white widget -->
+  <!-- Contact widget -->
   <div class="widget">
     <div class="content">
       <div class="contact-section">
