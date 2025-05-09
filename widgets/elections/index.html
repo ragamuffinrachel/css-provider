@@ -20,30 +20,50 @@
       --radius:  6px;
       --shadow:  0 1px 3px rgba(0,0,0,.1);
     }
-    *, *::before, *::after { box-sizing: border-box; }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    /* make the page flow vertically and center content */
     html, body {
       margin: 0;
       padding: 0;
       background: transparent;
       color: var(--text);
       font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .tabs button,
-    th {
-      font-family: 'termina', sans-serif;
-      font-weight: 300;
+
+    /* the Termina black header with purple bar */
+    .section-heading {
+      position: relative;
+      display: inline-block;
+      margin: 3rem auto 1.5rem;
+      font-family: 'termina-300', sans-serif;
+      font-size: 2.5rem;
+      color: #000;
+      text-align: center;
     }
-    .widget-heading {
-  font-family: 'termina-300', sans-serif;
-  color: #000;
-  /* …any other styling… */
+    .section-heading::before {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 0 auto 0.75rem;
     }
+
     .widget {
       width: 85%;
       min-width: 600px;
       max-width: 1000px;
-      margin: 3rem auto;
+      margin-bottom: 3rem;
     }
+
     .tabs {
       display: flex;
       flex-wrap: wrap;
@@ -61,15 +81,21 @@
       border-radius: var(--radius);
       cursor: pointer;
       transition: .15s;
+      font-family: 'termina-300', sans-serif;
+      font-weight: 300;
     }
     .tabs button[aria-selected="true"],
     .tabs button:hover {
       background: var(--accent);
       color: #fff;
     }
-    .tabs button:focus { outline: 2px solid var(--accent); }
+    .tabs button:focus {
+      outline: 2px solid var(--accent);
+    }
 
-    .panel { display: none; }
+    .panel {
+      display: none;
+    }
     .panel[data-active] {
       display: block;
       animation: slideIn 0.3s ease-in-out;
@@ -87,40 +113,54 @@
       border-radius: var(--radius);
       overflow: hidden;
     }
-    th:nth-child(1), td:nth-child(1) { width: 20%; }
-    th:nth-child(2), td:nth-child(2) { width: 45%; }
-    th:nth-child(3), td:nth-child(3) { width: 35%; }
-
-    thead { background: var(--accent); color: #fff; }
     th, td {
       padding: .75rem 1rem;
       text-align: left;
       font-size: .95rem;
     }
-    tbody tr:nth-child(odd) { background: var(--stripe); }
-    tbody tr:hover { background: rgba(0,119,200,.08); }
+    thead {
+      background: var(--accent);
+      color: #fff;
+    }
+    tbody tr:nth-child(odd) {
+      background: var(--stripe);
+    }
+    tbody tr:hover {
+      background: rgba(0,119,200,.08);
+    }
+    /* set each column’s width */
+    th:nth-child(1), td:nth-child(1) { width: 20%; }
+    th:nth-child(2), td:nth-child(2) { width: 45%; }
+    th:nth-child(3), td:nth-child(3) { width: 35%; }
 
     @media(max-width:650px) {
-      table { display: block; overflow-x: auto; }
+      table {
+        display: block;
+        overflow-x: auto;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Termina header above the widget -->
+  <h2 class="section-heading">Questions &amp; Contacts</h2>
+
   <div class="widget">
-      <h2 class="widget-heading">Questions &amp; Contacts</h2>
     <div class="tabs" role="tablist">
-      <button role="tab" id="t0" aria-controls="p0" aria-selected="true">1/1/22</button>
-      <button role="tab" id="t5" aria-controls="p5">1/1/22 cont.</button>
-      <button role="tab" id="t1" aria-controls="p1">1/1/23</button>
-      <button role="tab" id="t2" aria-controls="p2">7/1/23</button>
-      <button role="tab" id="t3" aria-controls="p3">1/1/24</button>
-      <button role="tab" id="t4" aria-controls="p4">7/1/24</button>
+      <button role="tab" id="t0"  aria-controls="p0" aria-selected="true">1/1/22</button>
+      <button role="tab" id="t5"  aria-controls="p5">1/1/22 cont.</button>
+      <button role="tab" id="t1"  aria-controls="p1">1/1/23</button>
+      <button role="tab" id="t2"  aria-controls="p2">7/1/23</button>
+      <button role="tab" id="t3"  aria-controls="p3">1/1/24</button>
+      <button role="tab" id="t4"  aria-controls="p4">7/1/24</button>
     </div>
 
     <!-- ============ 1 JAN 2022 =================================== -->
     <section class="panel" id="p0" role="tabpanel" aria-labelledby="t0" data-active>
       <table>
-        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
+        <thead>
+          <tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr>
+        </thead>
         <tbody>
           <tr>
             <td>Housing Transition Navigation Services</td>
@@ -153,7 +193,9 @@
     <!-- ============ 1 JAN 2023 =================================== -->
     <section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
       <table>
-        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
+        <thead>
+          <tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr>
+        </thead>
         <tbody>
           <tr>
             <td>Respite Services</td>
@@ -190,7 +232,9 @@
     <!-- ============ 1 JUL 2023 =================================== -->
     <section class="panel" id="p2" role="tabpanel" aria-labelledby="t2">
       <table>
-        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
+        <thead>
+          <tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr>
+        </thead>
         <tbody>
           <tr>
             <td>Nursing Facility Transition / Diversion to Assisted Living Facilities</td>
@@ -220,7 +264,9 @@
     <!-- ============ 1 JAN 2024 =================================== -->
     <section class="panel" id="p3" role="tabpanel" aria-labelledby="t3">
       <table>
-        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
+        <thead>
+          <tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr>
+        </thead>
         <tbody>
           <tr>
             <td>Day Habilitation Programs</td>
@@ -238,7 +284,9 @@
     <!-- ============ 1 JUL 2024 =================================== -->
     <section class="panel" id="p4" role="tabpanel" aria-labelledby="t4">
       <table>
-        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
+        <thead>
+          <tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr>
+        </thead>
         <tbody>
           <tr>
             <td>Environmental Accessibility Adaptation</td>
@@ -252,7 +300,9 @@
     <!-- ============ 1 JAN 2022 (continued) ======================= -->
     <section class="panel" id="p5" role="tabpanel" aria-labelledby="t5">
       <table>
-        <thead><tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr></thead>
+        <thead>
+          <tr><th>Service</th><th>Description</th><th>Contracted Providers</th></tr>
+        </thead>
         <tbody>
           <tr>
             <td>Recuperative Care (Medical Respite)</td>
@@ -283,7 +333,6 @@
         </tbody>
       </table>
     </section>
-
   </div>
 
   <script>
@@ -293,14 +342,14 @@
     tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
 
     // arrow-key navigation
-    document.querySelector('.tabs').addEventListener('keydown', e=>{
+    document.querySelector('.tabs').addEventListener('keydown', e => {
       const i = tabs.indexOf(document.activeElement);
       if (i < 0) return;
       if (e.key === 'ArrowRight') tabs[(i + 1) % tabs.length].focus();
       if (e.key === 'ArrowLeft')  tabs[(i + tabs.length - 1) % tabs.length].focus();
     });
 
-    function activateTab(tab){
+    function activateTab(tab) {
       tabs.forEach(t => t.setAttribute('aria-selected', t === tab));
       panels.forEach(p =>
         p.toggleAttribute('data-active',
