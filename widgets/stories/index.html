@@ -21,27 +21,43 @@
       --shadow:  0 1px 3px rgba(0,0,0,.1);
     }
 
-    /* 1. Make page‑level background transparent */
-    html,
-    body {
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    /* page‑level layout: stack elements, center horizontally */
+    html, body {
       margin: 0;
       padding: 2rem;
-      font-family: 'termina-300', 'Montserrat', sans-serif;
       background: transparent;
       color: var(--text);
+      font-family: 'Montserrat', sans-serif;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* 2. Hide or transparent-ize the divider outside the widget */
-    .divider-gradient {
-      background: transparent;
-      /* Or to remove it entirely: display: none; */
-      height: 6px;
-      margin: 2rem 0;
+    /* Termina black header with purple bar */
+    .section-heading {
+      position: relative;
+      display: inline-block;
+      margin: 0 0 2rem;
+      font-family: 'termina-300', sans-serif;
+      font-size: 2.5rem;
+      color: #000;
+      text-align: center;
+    }
+    .section-heading::before {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 0 auto 0.75rem;
     }
 
-    /* 3. Keep the widget itself white */
+    /* keep the widget itself white */
     .widget {
       max-width: 800px;
       width: 100%;
@@ -53,6 +69,7 @@
     }
 
     .widget h2 {
+      /* this inner h2 is optional – you can remove it if unused */
       margin: 0;
       font-size: 2rem;
       font-weight: 400;
@@ -77,7 +94,7 @@
       min-width: 180px;
       margin: 0 0 1rem 1rem;
       background: var(--accent);
-      color: #ffffff;
+      color: #fff;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 1.5rem;
@@ -96,7 +113,7 @@
     .pull-quote .decor-line .line {
       flex: 1;
       height: 1px;
-      background: #ffffff;
+      background: #fff;
     }
     .pull-quote .decor-line .heart {
       margin: 0 0.5rem;
@@ -132,15 +149,12 @@
         top: 0.5rem;
         right: 0.5rem;
       }
-      /* hide the divider on small screens */
-      .divider-gradient {
-        display: none;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="divider-gradient"></div>
+  <!-- Section header above the widget -->
+  <h2 class="section-heading">CSS Success Stories</h2>
 
   <div class="widget">
     <button class="next-btn" id="nextBtn" aria-label="Next">›</button>
@@ -148,13 +162,12 @@
       <div class="pull-quote" id="storyQuote">
         <div class="decor-line">
           <div class="line"></div>
-          <div class="heart">❤</div>
           <div class="line"></div>
         </div>
         <div id="quoteText"></div>
         <div class="decor-line">
           <div class="line"></div>
-          <div class="heart">❤</div>
+
           <div class="line"></div>
         </div>
       </div>
@@ -170,7 +183,7 @@
       },
       {
         text: `The member has been an active participant in the CalAIM Program with Community Action Partnership of Kern (CAPK) since 2024. She is a shining example of resilience and determination, proving that past challenges do not define one's future. Despite facing obstacles due to high income requirements and her rental history, the member refused to let those barriers stand in the way of building a better life for herself and her family. With the support of the CalAIM CAPK program, the member was connected with a compassionate landlord who welcomed her family—including their beloved pet—into a safe and stable home. Today, she and her children thrive in a fantastic school district, their family pet enjoys a spacious yard to roam, and, most importantly, she has the security and peace of mind that comes with stable housing.`,
-        quote: `Stable housing gave us a foundation to rebuild our lives—now we feel hopeful again.`
+        quote: `With the support of the CalAIM CAPK program, the member was connected with a compassionate landlord who welcomed her family`
       }
     ];
     let current = 0;
