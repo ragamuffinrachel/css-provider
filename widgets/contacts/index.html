@@ -18,7 +18,7 @@
       --shadow:  0 1px 3px rgba(0,0,0,0.1);
     }
 
-    /* Make the page background transparent */
+    /* Page layout: stack h2 + widget, center horizontally */
     html,
     body {
       margin: 0;
@@ -27,7 +27,28 @@
       background: transparent;
       color: var(--text);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Section heading above widget */
+    .section‑heading {
+      position: relative;
+      display: inline-block;       /* shrink‐wrap to text */
+      margin: 0 auto 1.5rem;       /* bottom gap before widget */
+      font-family: 'termina‑300', sans-serif;
+      font-size: 2.5rem;
+      color: #000;                  /* black text */
+      text-align: center;
+    }
+    .section‑heading::before {
+      content: '';
+      display: block;
+      width: 50px;                  /* length of the bar */
+      height: 4px;                  /* thickness of the bar */
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 0 auto 0.75rem;       /* center & gap below bar */
     }
 
     /* Ensure the widget itself stays white */
@@ -44,6 +65,7 @@
     }
 
     .widget h2 {
+      /* if you still want a heading inside, style it here */
       margin: 0;
       font-family: 'termina-300', sans-serif;
       font-size: 2rem;
@@ -51,16 +73,20 @@
       border-bottom: 2px solid var(--accent);
       padding-bottom: 0.5rem;
     }
+
     .content {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
     }
-    .contact-section, .staff-section {
+
+    .contact-section,
+    .staff-section {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
+
     .contact-section h3,
     .staff-section h3 {
       margin: 0;
@@ -70,18 +96,14 @@
       border-bottom: 1px solid var(--accent);
       padding-bottom: 0.25rem;
     }
+
     .contact-section p,
     .staff-item p {
       margin: 0;
       line-height: 1.5;
       font-size: 0.95rem;
     }
-    
-    .widget-heading {
-  font-family: 'termina-300', sans-serif;
-  color: #000;
-  /* …any other styling… */
-    }
+
     .contact-section a,
     .staff-item a {
       color: var(--accent);
@@ -91,11 +113,13 @@
     .staff-item a:hover {
       text-decoration: underline;
     }
+
     .staff-list {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
+
     .staff-item {
       background: var(--bg);
       border: 1px solid var(--accent);
@@ -117,8 +141,11 @@
   </style>
 </head>
 <body>
+  <!-- Section header with Termina, black text, purple bar -->
+  <h2 class="section‑heading">Questions &amp; Contacts</h2>
+
+  <!-- Your white widget -->
   <div class="widget">
-    <h2 class="widget-heading">Questions &amp; Contacts</h2>
     <div class="content">
       <div class="contact-section">
         <h3>Team Contact</h3>
