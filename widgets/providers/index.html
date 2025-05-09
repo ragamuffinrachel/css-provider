@@ -40,7 +40,39 @@
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
+    } /* Page heading */
+    .section-heading {
+      position: relative;
+      display: inline-block;
+      margin: 0;
+      font-family: 'termina', sans-serif;
+      font-weight: 300;
+      font-style: normal;
+      font-size: 2.5rem;
+      color: #000;
+      text-align: center;
     }
+    .section-heading::before {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: #957db5;
+      border-radius: 2px;
+      margin: 0 auto 1rem;
+    }
+
+    /* Subheading */
+    .subheading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      color: var(--text);
+      text-align: center;
+      max-width: 900px;
+      margin: 0 0 2rem;
+      line-height: 1.4;
+    }
+
     .grid-title {
       margin-bottom: 0.75rem;
       font-size: 1.5rem;
@@ -102,8 +134,12 @@
   </style>
 </head>
 <body>
+  
   <div class="grid-widget">
-    <!-- Optional title -->
+    <center><h2 class="section-heading">Community Supports Referral Process</h2>
+  <p class="subheading">
+    There is a "No Wrong Door" approach with the referral process. Kern Health Systems accepts referrals from our internal teams, ECM providers, other entities serving members, family member(s), and/or other authorized support person.
+  </p></center>
     <!-- <div class="grid-title">Our Partners</div> -->
     <div class="card-grid" id="cardGrid"></div>
   </div>
