@@ -12,11 +12,11 @@
 
   <style>
     :root {
-      --accent:  #8BA4D5;
-      --text:    #2B2B2B;
-      --bg:      transparent;
-      --radius:  6px;
-      --shadow:  0 1px 3px rgba(0,0,0,.1);
+      --accent: #8BA4D5;
+      --text: #2B2B2B;
+      --bg: transparent;
+      --radius: 6px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -38,7 +38,6 @@
       margin: 0;
       font-family: 'termina', sans-serif;
       font-weight: 300;
-      font-style: normal;
       font-size: 2.5rem;
       color: #000;
       text-align: center;
@@ -55,9 +54,7 @@
 
     /* Subheading */
     .subheading {
-      font-family: 'Montserrat', sans-serif;
       font-size: 1rem;
-      color: var(--text);
       text-align: center;
       max-width: 900px;
       margin: 0 0 2rem;
@@ -82,7 +79,7 @@
       font-weight: 600;
       border-radius: var(--radius);
       cursor: pointer;
-      transition: .2s;
+      transition: background .3s, color .3s;
     }
     .tabs button[aria-selected="true"] {
       background: var(--accent);
@@ -106,7 +103,7 @@
     }
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h2, h3 {
@@ -115,37 +112,34 @@
       margin-bottom: .5rem;
     }
 
-    /* Provider list with centered, bold, white text */
-    .provider-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-      gap: .75rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .provider-list li {
-      background: transparent;
-      padding: .75rem;
-      border-radius: var(--radius);
-      font-size: .80rem;
-      color: #000;
-      font-weight: 500;
+    /* Sleek portal button */
+    .portal-button {
       text-align: center;
+      margin-top: 1rem;
+    }
+    .portal-button a {
+      display: inline-block;
+      background: #fff;
+      padding: .75rem 1rem;
+      border: none;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+    }
+    .portal-button a:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      background: var(--accent);
+    }
+    .portal-button img {
+      max-height: 60px;
+      width: auto;
+      display: block;
     }
 
-    dl {
-      margin: 0;
-    }
-    dt {
-      font-weight: 600;
-      margin-top: .75rem;
-      font-size: .95rem;
-    }
-    dd {
-      margin: .25rem 0 .75rem 1rem;
-      font-size: .95rem;
-    }
+    dl { margin: 0; }
+    dt { font-weight: 600; margin-top: .75rem; font-size: .95rem; }
+    dd { margin: .25rem 0 .75rem 1rem; font-size: .95rem; }
 
     .two-col {
       display: grid;
@@ -153,45 +147,29 @@
       gap: 1.5rem;
       margin-top: 1rem;
     }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <center><h2 class="section-heading">Community Supports Referral Process</h2>
   <p class="subheading">
-    There is a "No Wrong Door" approach with the referral process. Kern Health Systems accepts referrals from our internal teams, ECM providers, other entities serving members, family member(s), and/or other authorized support person.
+    There is a "No Wrong Door" approach with the referral process. Kern Health Systems accepts referrals from our internal teams, ECM providers, other entities serving members, family members, and/or other authorized support persons.
   </p></center>
   <div class="tabs" role="tablist">
     <button role="tab" aria-selected="true" data-target="#contracted">KHS Contracted Providers</button>
-    <button role="tab" data-target="#noncontracted">Non‑Contracted &amp; Others</button>
+    <button role="tab" data-target="#noncontracted">Non‑Contracted & Others</button>
   </div>
 
   <div class="pane active" id="contracted">
     <div class="section">
-      <p>
-        <a href="https://provider.kernfamilyhealthcare.com/" target="_blank">
-          KFHC Provider Portal
-        </a>
-      </p>
+      <center><p>For KHS Contracted Providers, visit the <a href="https://provider.kernfamilyhealthcare.com/" target="_blank">KFHC Provider Portal</a> to submit a referral.</p></center>
     </div>
-
-    <ul class="provider-list">
-      <li>Kern County Housing Authority</li>
-      <li>CAPK</li>
-      <li>EA Family Services</li>
-      <li>St. Vincent Preventative Family Care</li>
-      <li>CityServe Network</li>
-      <li>The Open Door Network</li>
-      <li>Mercy House Living Centers</li>
-      <li>The Mission of Kern County</li>
-    </ul>
+    <div class="portal-button">
+      <a href="https://provider.kernfamilyhealthcare.com/" target="_blank">
+        <img src="https://raw.githubusercontent.com/ragamuffinrachel/css-provider/main/assets/TM_KFHC%20Logo_%C2%AE.png" alt="KFHC Logo">
+      </a>
+    </div>
   </div>
 
   <div class="pane" id="noncontracted">
@@ -214,9 +192,9 @@
         <h3>Department Contacts</h3>
         <dl>
           <dt>Community Supports Service Dept</dt>
-          <dd>661‑664‑5000 ext. 5916</dd>
+          <dd>661‑664‑5000 ext. 5916</dd>
           <dt>Member Services</dt>
-          <dd>661‑632‑1590, option 6<br>1‑800‑391‑2000, option 6</dd>
+          <dd>661‑632‑1590, option 6<br>1‑800‑391‑2000, option 6</dd>
         </dl>
       </div>
     </div>
