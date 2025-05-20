@@ -1,1 +1,190 @@
 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ECM Leadership Contact Information</title>
+  <!-- Typekit for Termina Light -->
+  <link rel="stylesheet" href="https://use.typekit.net/kpn8afx.css">
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent:  #8BA4D5;
+      --text:    #2B2B2B;
+      --bg:      #FFFFFF;
+      --radius:  8px;
+      --shadow:  0 1px 3px rgba(0,0,0,0.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 2rem;
+      background: transparent;
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-heading {
+      position: relative;
+      display: inline-block;
+      margin: 0 0 1.5rem;
+      font-family: 'termina', sans-serif;
+      font-weight: 300;
+      font-size: 2.5rem;
+      color: #000;
+      text-align: center;
+    }
+    .section-heading::before {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: #957db5;
+      border-radius: 2px;
+      margin: 0 auto 0.75rem;
+    }
+
+    .widget {
+      max-width: 800px;
+      width: 100%;
+      background: var(--bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 1.5rem;
+    }
+
+    /* Subtitle inside widget */
+    .widget h2 {
+      margin: 0;
+      font-family: 'termina', sans-serif;
+      font-weight: 300;
+      font-size: 1.75rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .staff-section,
+    .contact-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .staff-section h3,
+    .contact-section h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.25rem;
+    }
+
+    /* Grid two columns of staff cards for balance */
+    .staff-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .staff-item {
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 0.75rem;
+      box-shadow: var(--shadow);
+    }
+    .staff-item strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+    .staff-item a {
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .staff-item a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-section p {
+      margin: 0;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+    .contact-section a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .contact-section a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .content { grid-template-columns: 1fr; }
+      .staff-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page heading -->
+  <h2 class="section-heading">ECM Contacts</h2>
+
+  <!-- Contact widget -->
+  <div class="widget">
+    <!-- Subtitle -->
+
+    <div class="content">
+      <!-- Staff contacts -->
+      <div class="staff-section">
+        <h3>ECM Leadership</h3>
+        <div class="staff-list">
+          <div class="staff-item">
+            <strong>Loni Hill-Pirtle, LCSW, Director</strong>
+            <p><a href="mailto:loni.hill@khs-net.com">loni.hill@khs-net.com</a>  661‑664‑5167</p>
+          </div>
+          <div class="staff-item">
+            <strong>Dan Diaz, RN, Clinical Manager</strong>
+            <p><a href="mailto:dan.diaz@khs-net.com">dan.diaz@khs-net.com</a>  661‑664‑5561</p>
+          </div>
+          <div class="staff-item">
+            <strong>Blanca Casillas, Manager</strong>
+            <p><a href="mailto:blanca.casillas@khs-net.com">blanca.casillas@khs-net.com</a>  661‑664‑5097</p>
+          </div>
+          <div class="staff-item">
+            <strong>Adrianna Munoz, MPA, Manager</strong>
+            <p><a href="mailto:adrianna.munoz@khs-net.com">adrianna.munoz@khs-net.com</a>  661‑473‑7493</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- General ECM info -->
+      <div class="contact-section">
+        <h3>General ECM Information</h3>
+        <p>Members: <a href="https://www.kernfamilyhealthcare.com/members/enhanced-care-management/">Enhanced Care Management</a></p>
+        <p>Providers: <a href="https://www.kernfamilyhealthcare.com/providers/provider-resources/enhanced-care-management/">Enhanced Care Management</a></p>
+        <p>Brochure: <a href="https://res.cloudinary.com/dpmykpsih/image/upload/kern-site-353/media/2906d894a9294f8eac684a8633a7af9b/enhancedmancare_24_v4.pdf">Enhanced Care Management Member Brochure</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
