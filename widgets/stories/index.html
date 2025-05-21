@@ -25,7 +25,6 @@
       box-sizing: border-box;
     }
 
-    /* page‑level layout: stack elements, center horizontally */
     html, body {
       margin: 0;
       padding: 2rem;
@@ -37,16 +36,13 @@
       align-items: center;
     }
 
-    /* Termina black header with purple bar */
     .section-heading {
       position: relative;
       display: inline-block;
       margin: 0 0 2rem;
       font-family: 'termina', sans-serif;
       font-weight: 300;
-      font-style: normal;
       font-size: 2.5rem;
-      color: #000;
       text-align: center;
     }
     .section-heading::before {
@@ -59,7 +55,6 @@
       margin: 0 auto 0.75rem;
     }
 
-    /* keep the widget itself white */
     .widget {
       max-width: 800px;
       width: 100%;
@@ -70,22 +65,10 @@
       position: relative;
     }
 
-    .widget h2 {
-      /* this inner h2 is optional – you can remove it if unused */
-      margin: 0;
-      font-size: 2rem;
-      font-weight: 400;
-      color: var(--text);
-      text-align: center;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--stripe);
-    }
-
     .story-content {
       margin-top: 1rem;
     }
     .story-text {
-      font-family: 'Montserrat', sans-serif;
       font-size: 1rem;
       line-height: 1.6;
       text-align: justify;
@@ -117,28 +100,32 @@
       height: 1px;
       background: #fff;
     }
-    .pull-quote .decor-line .heart {
-      margin: 0 0.5rem;
-      font-size: 1.2rem;
-      line-height: 1;
-    }
     .story-content::after {
       content: "";
       display: block;
       clear: both;
     }
+
+    /* pill‑style “next” button, now static below content */
     .next-btn {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
+      display: block;
+      margin: 1.5rem 0 0 auto;  /* push down, and auto left‑margin to align right */
       background: none;
       color: var(--accent);
-      border: none;
+      border: 2px solid var(--accent);
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius);
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      cursor: pointer;
+      font-size: 1.75rem;
       line-height: 1;
-      padding: 0;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    }
+    .next-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateX(3px);
     }
 
     @media (max-width: 600px) {
@@ -148,54 +135,49 @@
         margin: 0 0 1rem;
       }
       .next-btn {
-        top: 0.5rem;
-        right: 0.5rem;
+        font-size: 1.5rem;
+        padding: 0.3rem 0.6rem;
+        margin: 1rem 0 0 auto;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Section header above the widget -->
   <h2 class="section-heading">CSS Success Stories</h2>
 
   <div class="widget">
-    <button class="next-btn" id="nextBtn" aria-label="Next">→</button>
     <div class="story-content">
       <div class="pull-quote" id="storyQuote">
-        <div class="decor-line">
-          <div class="line"></div>
-          <div class="line"></div>
-        </div>
+        <div class="decor-line"><div class="line"></div><div class="line"></div></div>
         <div id="quoteText"></div>
-        <div class="decor-line">
-          <div class="line"></div>
-
-          <div class="line"></div>
-        </div>
+        <div class="decor-line"><div class="line"></div><div class="line"></div></div>
       </div>
       <div class="story-text" id="storyText"></div>
     </div>
+    <!-- moved button here -->
+    
   </div>
-
+<button class="next-btn" id="nextBtn" aria-label="Next">→</button>
   <script>
     const stories = [
       {
         text: `Diagnosed with autism in early childhood, the member now relies on his mother for assistance with daily living activities. As an adult, he was referred to Community Support Services to address multiple needs, including asthma management, personal care and homemaker services, and respite support for his primary caregiver. Through coordinated services provided by SD Healthcare, the member has experienced improved health outcomes, including the prevention of asthma-related hospitalizations. Additionally, respite care allows his mother to maintain her own health and well-being, reducing caregiver burnout.`,
-        quote: `Story One`
+        quote: `Success Story One`
       },
       {
         text: `The member has been an active participant in the CalAIM Program with Community Action Partnership of Kern (CAPK) since 2024. She is a shining example of resilience and determination, proving that past challenges do not define one's future. Despite facing obstacles due to high income requirements and her rental history, the member refused to let those barriers stand in the way of building a better life for herself and her family. With the support of the CalAIM CAPK program, the member was connected with a compassionate landlord who welcomed her family—including their beloved pet—into a safe and stable home. Today, she and her children thrive in a fantastic school district, their family pet enjoys a spacious yard to roam, and, most importantly, she has the security and peace of mind that comes with stable housing.`,
-        quote: `Story Two`
+        quote: `Success Story Two`
       }
     ];
+
     let current = 0;
     const textEl = document.getElementById('storyText');
     const quoteEl = document.getElementById('quoteText');
     const btn = document.getElementById('nextBtn');
 
     function renderStory(idx) {
-      textEl.textContent = stories[idx].text;
-      quoteEl.textContent = `“${stories[idx].quote}”`;
+      textEl.textContent  = stories[idx].text;
+      quoteEl.textContent = stories[idx].quote;  // no wrapping quotes
     }
 
     btn.addEventListener('click', () => {
@@ -203,7 +185,7 @@
       renderStory(current);
     });
 
-    // init
+    // initialize first story
     renderStory(current);
   </script>
 </body>
