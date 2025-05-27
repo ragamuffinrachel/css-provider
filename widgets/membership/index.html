@@ -20,20 +20,14 @@
       --radius:  6px;
       --shadow:  0 1px 3px rgba(0,0,0,.1);
     }
-
     *, *::before, *::after { box-sizing: border-box; }
-
     html, body {
-      margin: 0;
-      padding: 2rem;
+      margin: 0; padding: 2rem;
       background: transparent;
       color: var(--text);
       font-family: 'Montserrat', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: flex; flex-direction: column; align-items: center;
     }
-
     .section-heading {
       position: relative;
       margin-bottom: 2rem;
@@ -46,110 +40,72 @@
     .section-heading::before {
       content: '';
       display: block;
-      width: 50px;
-      height: 4px;
-      background: #957db5;
-      border-radius: 2px;
+      width: 50px; height: 4px;
+      background: #957db5; border-radius: 2px;
       margin: 0 auto 0.75rem;
     }
-
     .widget {
-      max-width: 960px;
-      width: 100%;
-      padding: 1.5rem;
+      max-width: 960px; width: 100%; padding: 1.5rem;
     }
-
     .charts, .table-container {
       margin-bottom: 1rem;
     }
 
+    /* 1) Make each chart-container wider */
     .charts {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
     }
-
-    .chart-container,
-    .table-container {
-      flex: 1 1 280px;
+    .chart-container {
+      flex: 1 1 45%;           /* try to take 45% of the row */
       background: var(--stripe);
       padding: 1rem;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       text-align: center;
     }
-
-    .chart-container h3,
-    .table-container h3 {
-      margin: 0;
-      font-size: 1.2rem;
-      font-weight: 600;
+    .chart-container h3 {
+      margin: 0; font-size: 1.2rem; font-weight: 600;
     }
     .chart-container .subtitle {
       margin: 0.25rem 0 0.75rem;
-      font-size: 0.7rem;
-      font-weight: 400;
+      font-size: 0.9rem; font-weight: 400;
     }
-
     .chart-container canvas {
-      width: 100% !important;
-      height: 260px !important;
+      width: 100% !important; height: 260px !important;
     }
 
-    /* -- Improved Table Styling -- */
-    .table-wrapper {
-      overflow-x: auto;
-    }
+    /* Table (unchanged) */
+    .table-wrapper { overflow-x: auto; }
     .table-wrapper table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;                 /* fixed layout */
-      font-variant-numeric: tabular-nums;  /* monospaced digits */
+      width: 100%; border-collapse: collapse; table-layout: fixed;
+      font-variant-numeric: tabular-nums;
     }
-    .table-wrapper colgroup col:nth-child(1) { width: 30%; }   /* Program */
-    .table-wrapper colgroup col:nth-child(n+2) { width: 17.5%; }/* Each year */
-
+    .table-wrapper colgroup col:nth-child(1) { width: 30%; }
+    .table-wrapper colgroup col:nth-child(n+2) { width: 17.5%; }
     thead th {
-      background: var(--accent);
-      color: #fff;
-      padding: 0.75rem 0.5rem;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-align: center;                  /* center year headers */
+      background: var(--accent); color: #fff;
+      padding: .75rem .5rem; font-weight: 600; font-size: .9rem;
+      text-align: center;
     }
-    thead th:first-child {
-      text-align: left;                    /* Program title left */
-    }
-
+    thead th:first-child { text-align: left; }
     tbody td {
-      padding: 0.6rem 0.5rem;
-      border-bottom: 1px solid #ddd;
-      font-size: 0.9rem;
+      padding: .6rem .5rem; border-bottom: 1px solid #ddd;
+      font-size: .9rem;
     }
-    tbody td:first-child {
-      text-align: left;                    /* program names left */
-    }
-    tbody td:not(:first-child) {
-      text-align: center;                  /* numbers centered */
-    }
+    tbody td:first-child { text-align: left; }
+    tbody td:not(:first-child) { text-align: center; }
 
     /* Toggle button */
     #toggleBtn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: filter 0.2s;
+      padding: .5rem 1rem; font-size: .9rem; font-weight: 600;
+      background: var(--accent); color: #fff; border: none;
+      border-radius: var(--radius); cursor: pointer;
+      transition: filter .2s;
     }
-    #toggleBtn:hover {
-      filter: brightness(0.9);
-    }
+    #toggleBtn:hover { filter: brightness(0.9); }
   </style>
 </head>
 <body>
@@ -157,13 +113,13 @@
   <h2 class="section-heading">Membership &amp; Service Growth</h2>
 
   <div class="widget">
-    <!-- Charts view -->
+    <!-- Charts -->
     <div class="charts">
       <div class="chart-container">
         <h3>Members</h3>
         <p class="subtitle">
           Community Support Services Members Enrolled Year Totals<br>
-          2022 – 2025 YTD
+          2022 – 2025
         </p>
         <canvas id="membersChart"></canvas>
       </div>
@@ -171,23 +127,19 @@
         <h3>Services</h3>
         <p class="subtitle">
           Community Support Services Provided Year Totals<br>
-          2022 – 2025 YTD
+          2022 – 2025
         </p>
         <canvas id="servicesChart"></canvas>
       </div>
     </div>
 
-    <!-- Table view (hidden initially) -->
-    <div class="table-container" style="display: none;">
+    <!-- Table -->
+    <div class="table-container" style="display:none;">
       <h3>Program Services Rendered</h3>
       <div class="table-wrapper">
         <table>
           <colgroup>
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
+            <col><col><col><col><col>
           </colgroup>
           <thead>
             <tr>
@@ -216,72 +168,52 @@
       </div>
     </div>
 
-    <!-- Toggle button -->
+    <!-- Toggle -->
     <div style="text-align: right;">
       <button id="toggleBtn">Next &rarr;</button>
     </div>
   </div>
 
-  <!-- Chart.js & DataLabels -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script>
     Chart.register(ChartDataLabels);
+    const years    = ['2022','2023','2024','2025'];
+    const members  = [764,3618,10279,8730];
+    const services = [924,4220,12339,10433];
 
-    const years    = ['2022', '2023', '2024', '2025'];
-    const members  = [764, 3618, 10279, 8730];
-    const services = [924, 4220, 12339, 10433];
-
-    function makeGradient(ctx) {
-      const h = ctx.canvas.height;
-      const grad = ctx.createLinearGradient(0, 0, 0, h);
-      grad.addColorStop(0, '#F9B38C');
-      grad.addColorStop(1, '#F4A377');
+    function makeGradient(ctx){
+      const h=ctx.canvas.height,grad=ctx.createLinearGradient(0,0,0,h);
+      grad.addColorStop(0,'#F9B38C'); grad.addColorStop(1,'#F4A377');
       return grad;
     }
 
-    function buildChart(ctxId, data) {
-      const ctx = document.getElementById(ctxId).getContext('2d');
-      return new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: years,
-          datasets: [{
-            data,
-            backgroundColor: makeGradient(ctx),
-            borderRadius: 4,
-            barPercentage: 0.6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: false,
-          plugins: {
-            legend:  { display: false },
-            tooltip: { enabled: false },
-            datalabels: {
-              color:    'var(--text)',
-              font:     { family: 'Montserrat', weight: '600', size: 12 },
-              anchor:   'end',
-              align:    'start',
-              offset:   4,
-              formatter: v => v.toLocaleString()
+    function buildChart(id,data){
+      const ctx=document.getElementById(id).getContext('2d');
+      new Chart(ctx,{
+        type:'bar',
+        data:{ labels: years, datasets:[{
+          data,
+          backgroundColor: makeGradient(ctx),
+          borderRadius:4,
+          barPercentage:0.8,       /* chunkier bars */
+          categoryPercentage:0.8   /* chunkier bars */
+        }]},
+        options:{
+          responsive:true, maintainAspectRatio:false, animation:false,
+          plugins:{
+            legend:{display:false},
+            tooltip:{enabled:false},
+            datalabels:{
+              color:'var(--text)',
+              font:{family:'Montserrat',weight:'600',size:12},
+              anchor:'end',align:'start',offset:4,
+              formatter:v=>v.toLocaleString()
             }
           },
-          scales: {
-            x: {
-              grid: { display: false },
-              ticks: { font: { family: 'Montserrat', size: 12 } }
-            },
-            y: {
-              grid: { color: '#eee' },
-              ticks: {
-                font: { family: 'Montserrat', size: 12 },
-                beginAtZero: true,
-                callback: v => v.toLocaleString()
-              }
-            }
+          scales:{
+            x:{grid:{display:false},ticks:{font:{family:'Montserrat',size:12}}},
+            y:{grid:{color:'#eee'},ticks:{font:{family:'Montserrat',size:12},beginAtZero:true,callback:v=>v.toLocaleString()}}
           }
         }
       });
@@ -290,18 +222,17 @@
     buildChart('membersChart', members);
     buildChart('servicesChart', services);
 
-    // Toggle between charts and table
-    const toggleBtn = document.getElementById('toggleBtn');
-    const charts    = document.querySelector('.charts');
-    const tableView = document.querySelector('.table-container');
+    // Toggle logic
+    const btn       = document.getElementById('toggleBtn'),
+          chartsDiv = document.querySelector('.charts'),
+          tableDiv  = document.querySelector('.table-container');
 
-    toggleBtn.addEventListener('click', () => {
-      const showingCharts = charts.style.display !== 'none';
-      charts.style.display    = showingCharts ? 'none' : 'flex';
-      tableView.style.display = showingCharts ? 'block' : 'none';
-      toggleBtn.innerHTML     = showingCharts ? '&larr; Back' : 'Next &rarr;';
+    btn.addEventListener('click', ()=>{
+      const showCharts = chartsDiv.style.display !== 'none';
+      chartsDiv.style.display    = showCharts ? 'none' : 'flex';
+      tableDiv.style.display     = showCharts ? 'block' : 'none';
+      btn.innerHTML              = showCharts ? '&larr; Back' : 'Next &rarr;';
     });
   </script>
-
 </body>
 </html>
