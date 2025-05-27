@@ -59,6 +59,10 @@
       padding: 1.5rem;
     }
 
+    .charts, .table-container {
+      margin-bottom: 1rem;
+    }
+
     .charts {
       display: flex;
       gap: 1rem;
@@ -66,7 +70,8 @@
       justify-content: center;
     }
 
-    .chart-container {
+    .chart-container,
+    .table-container {
       flex: 1 1 280px;
       background: var(--stripe);
       padding: 1rem;
@@ -75,7 +80,8 @@
       text-align: center;
     }
 
-    .chart-container h3 {
+    .chart-container h3,
+    .table-container h3 {
       margin: 0;
       font-size: 1.2rem;
       font-weight: 600;
@@ -90,6 +96,60 @@
       width: 100% !important;
       height: 260px !important;
     }
+
+    /* -- Improved Table Styling -- */
+    .table-wrapper {
+      overflow-x: auto;
+    }
+    .table-wrapper table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;                 /* fixed layout */
+      font-variant-numeric: tabular-nums;  /* monospaced digits */
+    }
+    .table-wrapper colgroup col:nth-child(1) { width: 30%; }   /* Program */
+    .table-wrapper colgroup col:nth-child(n+2) { width: 17.5%; }/* Each year */
+
+    thead th {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 0.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;                  /* center year headers */
+    }
+    thead th:first-child {
+      text-align: left;                    /* Program title left */
+    }
+
+    tbody td {
+      padding: 0.6rem 0.5rem;
+      border-bottom: 1px solid #ddd;
+      font-size: 0.9rem;
+    }
+    tbody td:first-child {
+      text-align: left;                    /* program names left */
+    }
+    tbody td:not(:first-child) {
+      text-align: center;                  /* numbers centered */
+    }
+
+    /* Toggle button */
+    #toggleBtn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    #toggleBtn:hover {
+      filter: brightness(0.9);
+    }
   </style>
 </head>
 <body>
@@ -97,12 +157,13 @@
   <h2 class="section-heading">Membership &amp; Service Growth</h2>
 
   <div class="widget">
+    <!-- Charts view -->
     <div class="charts">
       <div class="chart-container">
         <h3>Members</h3>
         <p class="subtitle">
           Community Support Services Members Enrolled Year Totals<br>
-          2022 – 2024 YTD
+          2022 – 2025
         </p>
         <canvas id="membersChart"></canvas>
       </div>
@@ -110,10 +171,54 @@
         <h3>Services</h3>
         <p class="subtitle">
           Community Support Services Provided Year Totals<br>
-          2022 – 2024 YTD
+          2022 – 2025
         </p>
         <canvas id="servicesChart"></canvas>
       </div>
+    </div>
+
+    <!-- Table view (hidden initially) -->
+    <div class="table-container" style="display: none;">
+      <h3>Program Services Rendered</h3>
+      <div class="table-wrapper">
+        <table>
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Program</th>
+              <th>2022</th>
+              <th>2023</th>
+              <th>2024</th>
+              <th>2025</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Asthma Remediation</td><td>37</td><td>1,496</td><td>1,423</td><td>684</td></tr>
+            <tr><td>Caregiver Respite</td><td>0</td><td>139</td><td>605</td><td>754</td></tr>
+            <tr><td>Day Habilitation</td><td>0</td><td>0</td><td>828</td><td>737</td></tr>
+            <tr><td>Environmental Accessibility</td><td>0</td><td>0</td><td>20</td><td>37</td></tr>
+            <tr><td>Housing Deposits</td><td>59</td><td>164</td><td>380</td><td>268</td></tr>
+            <tr><td>Housing Navigation</td><td>666</td><td>1,251</td><td>1,676</td><td>1,428</td></tr>
+            <tr><td>Housing Sustainability</td><td>58</td><td>278</td><td>402</td><td>283</td></tr>
+            <tr><td>Personal Care Services</td><td>0</td><td>68</td><td>1,068</td><td>1,413</td></tr>
+            <tr><td>Recuperative Care</td><td>76</td><td>135</td><td>217</td><td>93</td></tr>
+            <tr><td>Short Term Post Hosp</td><td>28</td><td>93</td><td>174</td><td>65</td></tr>
+            <tr><td>Sobering Centers</td><td>0</td><td>324</td><td>493</td><td>260</td></tr>
+            <tr><td>Tailored Meals</td><td>0</td><td>272</td><td>5,053</td><td>4,411</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Toggle button -->
+    <div style="text-align: right;">
+      <button id="toggleBtn">Next &rarr;</button>
     </div>
   </div>
 
@@ -123,9 +228,9 @@
   <script>
     Chart.register(ChartDataLabels);
 
-    const years    = ['2022', '2023', '2024'];
-    const members  = [764, 3629, 4465];
-    const services = [2236, 16658, 26552];
+    const years    = ['2022', '2023', '2024', '2025'];
+    const members  = [764, 3618, 10279, 8730];
+    const services = [924, 4220, 12339, 10433];
 
     function makeGradient(ctx) {
       const h = ctx.canvas.height;
@@ -160,12 +265,23 @@
               font:     { family: 'Montserrat', weight: '600', size: 12 },
               anchor:   'end',
               align:    'start',
-              offset:   4
+              offset:   4,
+              formatter: v => v.toLocaleString()
             }
           },
           scales: {
-            x: { grid: { display: false }, ticks: { font: { family: 'Montserrat', size: 12 } } },
-            y: { grid: { color: '#eee' }, ticks: { font: { family: 'Montserrat', size: 12 }, beginAtZero: true } }
+            x: {
+              grid: { display: false },
+              ticks: { font: { family: 'Montserrat', size: 12 } }
+            },
+            y: {
+              grid: { color: '#eee' },
+              ticks: {
+                font: { family: 'Montserrat', size: 12 },
+                beginAtZero: true,
+                callback: v => v.toLocaleString()
+              }
+            }
           }
         }
       });
@@ -173,6 +289,18 @@
 
     buildChart('membersChart', members);
     buildChart('servicesChart', services);
+
+    // Toggle between charts and table
+    const toggleBtn = document.getElementById('toggleBtn');
+    const charts    = document.querySelector('.charts');
+    const tableView = document.querySelector('.table-container');
+
+    toggleBtn.addEventListener('click', () => {
+      const showingCharts = charts.style.display !== 'none';
+      charts.style.display    = showingCharts ? 'none' : 'flex';
+      tableView.style.display = showingCharts ? 'block' : 'none';
+      toggleBtn.innerHTML     = showingCharts ? '&larr; Back' : 'Next &rarr;';
+    });
   </script>
 
 </body>
