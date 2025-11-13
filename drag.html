@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Knowledge Check - Drag and Drop Sorting (Self-Contained)</title>
+  <title>Knowledge Check - Multi-Activity</title>
 
-  <!-- BeerCSS + JS + Material Dynamic Colors -->
   <link href="https://cdn.jsdelivr.net/npm/beercss@3.12.8/dist/cdn/beer.min.css" rel="stylesheet">
   <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.12.8/dist/cdn/beer.min.js"></script>
   <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.2/dist/cdn/material-dynamic-colors.min.js"></script>
 
-  <!-- Lock BeerCSS theme to the original colors -->
+  <!-- Added Google Font for Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       /* Core theme (Material-style names used by BeerCSS) */
@@ -38,10 +41,6 @@
     }
   </style>
 
-  <!--
-    Self-contained widget for embedding as a Storyline 360 Web Object.
-    - All CSS & JS inlined (except BeerCSS + scripts above).
-  -->
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
@@ -50,111 +49,238 @@
       background-color: #F7FAFC; color: #333;
     }
     .knowledge-check-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-    .title {
+    
+    /* --- Activity 1: Drag and Drop --- */
+    #activity-1 .title {
+      font-family: 'Playfair Display', serif; /* Updated font */
       font-size: 2.2rem; font-weight: 700; color: #6750A4;
       text-align: center; margin-bottom: 16px;
     }
-    .instructions { font-size: 1.05rem; text-align: center; color: #5f6b7a; margin-bottom: 32px; }
-    .section-title { font-size: 1.4rem; color: #6750A4; margin-bottom: 16px; text-align: center; }
+    #activity-1 .instructions { font-size: 1.05rem; text-align: center; color: #5f6b7a; margin-bottom: 32px; }
+    #activity-1 .section-title { font-size: 1.4rem; color: #6750A4; margin-bottom: 16px; text-align: center; }
 
-    .drag-items-container { margin-bottom: 28px; }
-    .draggable-items {
+    #activity-1 .drag-items-container { margin-bottom: 28px; }
+    #activity-1 .draggable-items {
       display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px;
     }
-    .drag-item {
+    #activity-1 .drag-item {
       background: #fff; border: 2px solid #E7E0EB; border-radius: 12px; padding: 16px;
       min-width: 200px; text-align: center; cursor: grab; user-select: none;
       transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(103,80,164,.08);
     }
-    .drag-item:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(103,80,164,.18); border-color: #6750A4; }
-    .drag-item:active { cursor: grabbing; }
-    .drag-item.dragging { opacity: .6; transform: rotate(3deg); z-index: 1000; }
-    .drag-item span { font-weight: 600; color: #333; }
+    #activity-1 .drag-item:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(103,80,164,.18); border-color: #6750A4; }
+    #activity-1 .drag-item:active { cursor: grabbing; }
+    #activity-1 .drag-item.dragging { opacity: .6; transform: rotate(3deg); z-index: 1000; }
+    #activity-1 .drag-item span { font-weight: 600; color: #333; }
+    #activity-1 .drag-item.correct { border-color: var(--success); background-color: rgba(76,175,80,.05); }
+    #activity-1 .drag-item.incorrect { border-color: var(--error); background-color: rgba(244,67,54,.05); }
 
-    .drop-zones { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-    .drop-zone {
+
+    #activity-1 .drop-zones { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    #activity-1 .drop-zone {
       background: #fff; border: 2px dashed #E7E0EB; border-radius: 12px; padding: 16px; min-height: 120px; transition: all .2s ease;
     }
-    .drop-zone.drag-over { border-color: #6750A4; background-color: rgba(103,80,164,.05); transform: scale(1.01); }
-    .category-title { font-size: 1.05rem; color: #6750A4; margin-bottom: 10px; text-align: center; }
-    .drop-area {
+    #activity-1 .drop-zone.drag-over { border-color: #6750A4; background-color: rgba(103,80,164,.05); transform: scale(1.01); }
+    #activity-1 .category-title { font-size: 1.05rem; color: #6750A4; margin-bottom: 10px; text-align: center; }
+    #activity-1 .drop-area {
       min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px; position: relative;
     }
-    .drop-placeholder { color: #9F9F9F; font-style: italic; text-align: center; }
-    .drop-area .drag-item { margin: 0; width: 100%; }
-    .drop-area.has-item .drop-placeholder { display: none; }
+    #activity-1 .drop-placeholder { color: #9F9F9F; font-style: italic; text-align: center; }
+    #activity-1 .drop-area .drag-item { margin: 0; width: 100%; }
+    #activity-1 .drop-area.has-item .drop-placeholder { display: none; }
 
-    .feedback-container { margin-top: 28px; text-align: center; }
-    .feedback {
+    #activity-1 .feedback-container { margin-top: 28px; text-align: center; }
+    #activity-1 .feedback {
       padding: 16px; border-radius: 12px; margin-bottom: 16px; font-weight: 600; font-size: 1rem;
     }
-    .feedback.success { background: rgba(76,175,80,.1); color: #2e7d32; border: 1px solid #4CAF50; }
-    .feedback.error { background: rgba(244,67,54,.1); color: #d11241; border: 1px solid #F44336; }
-    .feedback.hidden { display: none; }
-
+    #activity-1 .feedback.success { background: rgba(76,175,80,.1); color: #2e7d32; border: 1px solid #4CAF50; }
+    #activity-1 .feedback.error { background: rgba(244,67,54,.1); color: #d11241; border: 1px solid #F44336; }
+    #activity-1 .feedback.hidden { display: none; }
+    
+    #activity-1 .feedback-container button,
+    #activity-2 .feedback-container button {
+      margin: 4px; /* Add spacing to buttons */
+    }
 
 
     @media (max-width: 768px) {
-      .title { font-size: 1.8rem; }
-      .draggable-items { flex-direction: column; align-items: center; }
-      .drop-zones { grid-template-columns: 1fr; }
+      #activity-1 .title { font-size: 1.8rem; }
+      #activity-1 .draggable-items { flex-direction: column; align-items: center; }
+      #activity-1 .drop-zones { grid-template-columns: 1fr; }
     }
+    
+    /* --- Activity 2: Selectable Items --- */
+    
+    #activity-2 .title {
+      font-family: 'Playfair Display', serif; /* Updated font */
+      font-size: 2.2rem; font-weight: 700; color: #6750A4;
+      text-align: center; margin-bottom: 16px;
+    }
+    #activity-2 .instructions { font-size: 1.05rem; text-align: center; color: #5f6b7a; margin-bottom: 32px; }
+    
+    #activity-2 .selectable-items-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    #activity-2 .selectable-item {
+      background: #fff; border: 2px solid #E7E0EB; border-radius: 12px; padding: 20px;
+      text-align: center; cursor: pointer; user-select: none;
+      transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(103,80,164,.08);
+      position: relative;
+    }
+    #activity-2 .selectable-item:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 6px 18px rgba(103,80,164,.18); 
+      border-color: #9c8bc4; 
+    }
+    #activity-2 .selectable-item.selected {
+      border-color: #6750A4;
+      background-color: rgba(103,80,164,.05);
+      box-shadow: 0 4px 12px rgba(103,80,164,.15);
+    }
+    #activity-2 .selectable-item span { font-weight: 600; color: #333; }
+
+    /* Feedback styles (for after checking answers) */
+    #activity-2 .selectable-item.correct {
+      border-color: var(--success);
+      background-color: rgba(76,175,80,.05);
+    }
+    #activity-2 .selectable-item.incorrect {
+      border-color: var(--error);
+      background-color: rgba(244,67,54,.05);
+    }
+
+    /* Feedback text container */
+    #activity-2 .feedback-container { margin-top: 28px; text-align: center; }
+    #activity-2 .feedback {
+      padding: 16px; border-radius: 12px; margin-bottom: 16px; font-weight: 600; font-size: 1rem;
+    }
+    #activity-2 .feedback.success { background: rgba(76,175,80,.1); color: #2e7d32; border: 1px solid #4CAF50; }
+    #activity-2 .feedback.error { background: rgba(244,67,54,.1); color: #d11241; border: 1px solid #F44336; }
+    #activity-2 .feedback.hidden { display: none; }
+
+    @media (max-width: 768px) {
+      #activity-2 .title { font-size: 1.8rem; }
+      #activity-2 .selectable-items-container { grid-template-columns: 1fr; }
+    }
+    
   </style>
 </head>
 <body>
-  <div class="knowledge-check-container" role="application" aria-label="Drag and Drop Knowledge Check">
 
-    <div class="drag-items-container">
-      <div class="draggable-items" aria-label="Draggable items">
-        <div class="drag-item" tabindex="0" draggable="true" data-category="category-1" aria-grabbed="false" role="button" aria-label="High staff turnover rate">
-          <span>High staff turnover rate</span>
-        </div>
-        <div class="drag-item" tabindex="0" draggable="true" data-category="category-2" aria-grabbed="false" role="button" aria-label="Cyber attack on member records">
-          <span>Cyber attack on member records</span>
-        </div>
-        <div class="drag-item" tabindex="0" draggable="true" data-category="category-3" aria-grabbed="false" role="button" aria-label="Negative public opinion">
-          <span>Negative public opinion</span>
-        </div>
-        <div class="drag-item" tabindex="0" draggable="true" data-category="category-4" aria-grabbed="false" role="button" aria-label="Regulatory Penalties">
-          <span>Regulatory Penalties</span>
+  <div id="activity-1" class="knowledge-check-wrapper">
+    <div class="knowledge-check-container" role="application" aria-label="Drag and Drop Knowledge Check">
+      
+      <div class="title" tabindex="-1">Knowledge Check: Risk Categories</div>
+      <p class="instructions">Drag each risk example to its correct category.</p>
+
+      <div class="drag-items-container">
+        <div class="draggable-items" aria-label="Draggable items">
+          <div class="drag-item" tabindex="0" draggable="true" data-category="category-1" aria-grabbed="false" role="button" aria-label="High staff turnover rate">
+            <span>High staff turnover rate</span>
+          </div>
+          <div class="drag-item" tabindex="0" draggable="true" data-category="category-2" aria-grabbed="false" role="button" aria-label="Cyber attack on member records">
+            <span>Cyber attack on member records</span>
+          </div>
+          <div class="drag-item" tabindex="0" draggable="true" data-category="category-3" aria-grabbed="false" role="button" aria-label="Negative public opinion">
+            <span>Negative public opinion</span>
+          </div>
+          <div class="drag-item" tabindex="0" draggable="true" data-category="category-4" aria-grabbed="false" role="button" aria-label="Regulatory Penalties">
+            <span>Regulatory Penalties</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="drop-zones-container">
-      <div class="drop-zones">
-        <div class="drop-zone" data-category="category-2" role="region" aria-label="Category 2 drop zone">
-          <h3 class="category-title">Technology</h3>
-          <div class="drop-area"></div>
-        </div>
-        <div class="drop-zone" data-category="category-1" role="region" aria-label="Category 1 drop zone">
-          <h3 class="category-title">Human Capital</h3>
-          <div class="drop-area"></div>
-        </div>
-        <div class="drop-zone" data-category="category-4" role="region" aria-label="Category 4 drop zone">
-          <h3 class="category-title">Financial</h3>
-          <div class="drop-area"></div>
-        </div>
-        <div class="drop-zone" data-category="category-3" role="region" aria-label="Category 3 drop zone">
-          <h3 class="category-title">Strategic</h3>
-          <div class="drop-area"></div>
+      <div class="drop-zones-container">
+        <div class="drop-zones">
+          <div class="drop-zone" data-category="category-2" role="region" aria-label="Category 2 drop zone">
+            <h3 class="category-title">Technology</h3>
+            <div class="drop-area"><span class="drop-placeholder">Drop here</span></div>
+          </div>
+          <div class="drop-zone" data-category="category-1" role="region" aria-label="Category 1 drop zone">
+            <h3 class="category-title">Human Capital</h3>
+            <div class="drop-area"><span class="drop-placeholder">Drop here</span></div>
+          </div>
+          <div class="drop-zone" data-category="category-4" role="region" aria-label="Category 4 drop zone">
+            <h3 class="category-title">Financial</h3>
+            <div class="drop-area"><span class="drop-placeholder">Drop here</span></div>
+          </div>
+          <div class="drop-zone" data-category="category-3" role="region" aria-label="Category 3 drop zone">
+            <h3 class="category-title">Strategic</h3>
+            <div class="drop-area"><span class="drop-placeholder">Drop here</span></div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="feedback-container">
-      <div id="feedback" class="feedback hidden" role="status" aria-live="polite"></div>
-      <button id="check-answers" class="check-button" type="button">Check Answers</button>
-      <button id="reset" class="reset-button" type="button">Reset</button>
+      <div class="feedback-container">
+        <div id="feedback-1" class="feedback hidden" role="status" aria-live="polite"></div>
+        <button id="check-answers-1" class="tonal" type="button">Check Answers</button>
+        <button id="reset-1" type="button">Reset</button>
+        <button id="next-button" class="fill" type="button" style="display: none;">Next</button>
+      </div>
     </div>
   </div>
 
+  <div id="activity-2" class="knowledge-check-wrapper" style="display: none;">
+    <div class="knowledge-check-container" role="application" aria-label="Selectable Knowledge Check">
+
+      <div class="title" tabindex="-1">Knowledge Check: Identifying Risks</div>
+      <p class="instructions">Select the scenarios that should be reported as a potential risk.</p>
+    
+      <div class="selectable-items-container" role="group" aria-label="Selectable scenarios">
+        
+        <div class="selectable-item" tabindex="0" role="checkbox" aria-checked="false" data-risk="yes">
+          <span>You determine a report you sent over to be submitted to DHCS had a calculation error and the number reported is incorrect.</span>
+        </div>
+        
+        <div class="selectable-item" tabindex="0" role="checkbox" aria-checked="false" data-risk="yes">
+          <span>You review an All Plan Letter (APL) and know that your department is not adhering to one of the provisions within.</span>
+        </div>
+        
+        <div class="selectable-item" tabindex="0" role="checkbox" aria-checked="false" data-risk="yes">
+          <span>You notice a claims frequency edit appears to not be working or be turned off, and claims are now paying that would previously be denied.</span>
+        </div>
+  
+        <div class="selectable-item" tabindex="0" role="checkbox" aria-checked="false" data-risk="no">
+          <span>You make three outbound calls to a member to try and advise a service was approved, and the member does not answer or return your call.</span>
+        </div>
+  
+      </div>
+    
+      <p class="instructions" style="margin-top: 32px; font-style: italic; font-size: 1rem;">
+        If you are unsure, please refer the issue to compliance.
+      </p>
+    
+      <!-- MODIFICATION: Updated IDs to be unique for activity 2 -->
+      <div class="feedback-container">
+        <div id="feedback-2" class="feedback hidden" role="status" aria-live="polite"></div>
+        <button id="check-answers-2" class="tonal" type="button">Check Answers</button>
+        <button id="reset-2" type="button">Reset</button>
+        <button id="finish-button-2" class="fill" type="button" style="display: none;">Finish</button>
+      </div>
+    </div>
+  </div>
+
+
   <script>
   (function () {
+    
+    /**
+     * ACTIVITY 1: DragDropSorting CLASS
+     * Modified to accept a rootElement
+     */
     class DragDropSorting {
-      constructor() {
+      constructor(rootElement) {
+        this.rootElement = rootElement;
+        if (!this.rootElement) return;
+
         this.draggedElement = null;
         this.keyboardMode = { active: false, item: null, zoneIndex: 0 };
+        this.nextButton = null; // For the "Next" button
         this.init();
       }
 
@@ -166,8 +292,8 @@
       }
 
       setupDragAndDrop() {
-        const dragItems = document.querySelectorAll('.drag-item');
-        const dropZones = document.querySelectorAll('.drop-zone');
+        const dragItems = this.rootElement.querySelectorAll('.drag-item');
+        const dropZones = this.rootElement.querySelectorAll('.drop-zone');
 
         dragItems.forEach(item => {
           item.addEventListener('dragstart', this.handleDragStart.bind(this));
@@ -216,8 +342,26 @@
 
       moveItemToDropZone(item, dropArea) {
         const parent = item.parentNode;
-        if (parent && parent.classList.contains('drop-area')) parent.classList.remove('has-item');
+        if (parent && parent.classList.contains('drop-area')) {
+          parent.classList.remove('has-item');
+          if (!parent.querySelector('.drop-placeholder')) {
+             const placeholder = document.createElement('span');
+             placeholder.className = 'drop-placeholder';
+             placeholder.textContent = 'Drop here';
+             parent.appendChild(placeholder);
+          }
+        } else {
+            // Remove placeholder from original container if it's there
+            const originalPlaceholder = parent.querySelector('.drop-placeholder');
+            if(originalPlaceholder) originalPlaceholder.remove();
+        }
+        
         item.remove();
+        
+        // Remove placeholder from new drop area
+        const placeholder = dropArea.querySelector('.drop-placeholder');
+        if (placeholder) placeholder.remove();
+        
         dropArea.appendChild(item);
         dropArea.classList.add('has-item');
         item.style.opacity = '0'; item.style.transform = 'scale(.96)';
@@ -227,25 +371,39 @@
       }
 
       returnItemToOriginalArea(item) {
-        const container = document.querySelector('.draggable-items');
+        const container = this.rootElement.querySelector('.draggable-items');
         const dropArea = item.parentNode;
         item.remove();
         container.appendChild(item);
-        if (dropArea && dropArea.classList) dropArea.classList.remove('has-item');
+        if (dropArea && dropArea.classList) {
+            dropArea.classList.remove('has-item');
+             // Add placeholder back if it's missing
+           if (!dropArea.querySelector('.drop-placeholder')) {
+             const placeholder = document.createElement('span');
+             placeholder.className = 'drop-placeholder';
+             placeholder.textContent = 'Drop here';
+             dropArea.appendChild(placeholder);
+         }
+        }
         item.classList.remove('correct', 'incorrect');
       }
 
       setupButtons() {
-        const checkButton = document.getElementById('check-answers');
-        const resetButton = document.getElementById('reset');
+        // MODIFICATION: Use unique IDs for activity 1
+        const checkButton = this.rootElement.querySelector('#check-answers-1');
+        const resetButton = this.rootElement.querySelector('#reset-1');
+        this.nextButton = this.rootElement.querySelector('#next-button'); // Find the next button
+
         checkButton.addEventListener('click', this.checkAnswers.bind(this));
         resetButton.addEventListener('click', this.resetGame.bind(this));
+        this.nextButton.addEventListener('click', this.goToNextActivity.bind(this)); // Add click listener
       }
 
       checkAnswers() {
-        const dropZones = document.querySelectorAll('.drop-zone');
+        const dropZones = this.rootElement.querySelectorAll('.drop-zone');
         let correctCount = 0;
         let totalItems = 0;
+        let allDropped = true;
 
         dropZones.forEach(zone => {
           const dropArea = zone.querySelector('.drop-area');
@@ -259,16 +417,28 @@
             else { item.classList.add('incorrect'); }
           }
         });
+        
+        // Check if any items are left in the draggable area
+        const remainingItems = this.rootElement.querySelector('.draggable-items').children.length;
+        if (remainingItems > 0) {
+            allDropped = false;
+        }
 
-        this.showFeedback(correctCount, totalItems);
+        this.showFeedback(correctCount, totalItems, allDropped);
       }
 
-      showFeedback(correct, total) {
-        const feedback = document.getElementById('feedback');
+      showFeedback(correct, total, allDropped) {
+        // MODIFICATION: Use unique ID for activity 1
+        const feedback = this.rootElement.querySelector('#feedback-1');
         feedback.classList.remove('hidden', 'success', 'error');
-        if (correct === total && total > 0) {
+
+        if (!allDropped) {
+          feedback.textContent = 'Please drag all items to a category before checking.';
+          feedback.classList.add('error');
+        } else if (correct === total && total > 0) {
           feedback.textContent = `Excellent! You got all ${correct} items correct!`;
           feedback.classList.add('success');
+          this.nextButton.style.display = 'inline-block'; // Show next button
         } else if (total > 0) {
           feedback.textContent = `You got ${correct} out of ${total} items correct. Try again!`;
           feedback.classList.add('error');
@@ -279,20 +449,33 @@
       }
 
       hideFeedback() {
-        const feedback = document.getElementById('feedback');
+        // MODIFICATION: Use unique ID for activity 1
+        const feedback = this.rootElement.querySelector('#feedback-1');
         feedback.classList.add('hidden');
-        document.querySelectorAll('.drag-item').forEach(i => i.classList.remove('correct', 'incorrect'));
+        this.rootElement.querySelectorAll('.drag-item').forEach(i => i.classList.remove('correct', 'incorrect'));
+        if (this.nextButton) this.nextButton.style.display = 'none'; // Hide next button
       }
 
       resetGame() {
-        const items = document.querySelectorAll('.drag-item');
+        const items = this.rootElement.querySelectorAll('.drag-item');
         items.forEach(item => this.returnItemToOriginalArea(item));
         this.hideFeedback();
       }
+      
+      goToNextActivity() {
+          this.rootElement.style.display = 'none';
+          const nextActivity = document.getElementById('activity-2');
+          if (nextActivity) {
+            nextActivity.style.display = 'block';
+            // Optional: focus the title of the new activity for accessibility
+            const nextTitle = nextActivity.querySelector('.title');
+            if (nextTitle) nextTitle.focus();
+          }
+      }
 
-      // Light touch support (for mobile / tablets inside Storyline web object)
+      // Light touch support
       setupTouchSupport() {
-        const items = document.querySelectorAll('.drag-item');
+        const items = this.rootElement.querySelectorAll('.drag-item');
         let activeItem = null;
 
         items.forEach(item => {
@@ -318,10 +501,10 @@
         });
       }
 
-      // Basic keyboard-only workflow for accessibility
+      // Basic keyboard-only workflow
       setupKeyboardAccessibility() {
-        const items = document.querySelectorAll('.drag-item');
-        const zones = Array.from(document.querySelectorAll('.drop-zone'));
+        const items = this.rootElement.querySelectorAll('.drag-item');
+        const zones = Array.from(this.rootElement.querySelectorAll('.drop-zone'));
 
         items.forEach(item => {
           item.addEventListener('keydown', (e) => {
@@ -361,8 +544,158 @@
         });
       }
     }
+    
+    /**
+     * ACTIVITY 2: SelectableActivity CLASS
+     * Modified to accept a rootElement
+     */
+    class SelectableActivity {
+      constructor(rootElement) {
+        this.rootElement = rootElement;
+        if (!this.rootElement) return;
+        
+        // MODIFICATION: Scope selections to rootElement and use unique IDs for activity 2
+        this.items = this.rootElement.querySelectorAll('.selectable-item');
+        this.checkButton = this.rootElement.querySelector('#check-answers-2');
+        this.resetButton = this.rootElement.querySelector('#reset-2');
+        this.finishButton = this.rootElement.querySelector('#finish-button-2');
+        this.feedback = this.rootElement.querySelector('#feedback-2');
+        
+        this.init();
+      }
 
-    document.addEventListener('DOMContentLoaded', () => new DragDropSorting());
+      init() {
+        this.setupItems();
+        this.setupButtons();
+      }
+
+      setupItems() {
+        this.items.forEach(item => {
+          item.addEventListener('click', this.handleItemClick.bind(this));
+          item.addEventListener('keydown', this.handleItemKeydown.bind(this));
+        });
+      }
+
+      handleItemClick(e) {
+        const item = e.currentTarget;
+        this.toggleItemSelection(item);
+      }
+      
+      handleItemKeydown(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault(); // Stop spacebar from scrolling
+          this.toggleItemSelection(e.currentTarget);
+        }
+      }
+
+      toggleItemSelection(item) {
+        // Don't allow toggling if the activity is already "finished"
+        if (this.checkButton.style.display === 'none') return;
+        const isSelected = item.classList.toggle('selected');
+        item.setAttribute('aria-checked', isSelected);
+        this.hideFeedback(); // Hide feedback if user changes an answer
+      }
+
+      setupButtons() {
+        this.checkButton.addEventListener('click', this.checkAnswers.bind(this));
+        this.resetButton.addEventListener('click', this.resetActivity.bind(this));
+        this.finishButton.addEventListener('click', this.finishActivity.bind(this)); // ADDED
+      }
+
+      checkAnswers() {
+        this.hideFeedback(); // Clear previous results first
+        let correctCount = 0;
+        const totalItems = this.items.length;
+
+        this.items.forEach(item => {
+          const isSelected = item.classList.contains('selected');
+          const isRisk = item.dataset.risk === 'yes';
+          
+          let isCorrect = false;
+          if (isSelected && isRisk) {
+            // Correct: Selected a risk
+            isCorrect = true;
+          } else if (!isSelected && !isRisk) {
+            // Correct: Did NOT select a non-risk
+            isCorrect = true;
+          }
+
+          if (isCorrect) {
+            correctCount++;
+            item.classList.add('correct');
+          } else {
+            item.classList.add('incorrect');
+          }
+        });
+
+        this.showFeedback(correctCount, totalItems);
+      }
+
+      showFeedback(correct, total) {
+        this.feedback.classList.remove('hidden', 'success', 'error');
+        if (correct === total && total > 0) {
+          this.feedback.textContent = `Excellent! You got all ${correct} items correct!`;
+          this.feedback.classList.add('success');
+          this.finishButton.style.display = 'inline-block'; // ADDED: Show finish button
+        } else {
+          this.feedback.textContent = `You got ${correct} out of ${total} items correct. Please review the items and try again.`;
+          this.feedback.classList.add('error');
+        }
+      }
+
+      hideFeedback() {
+        this.feedback.classList.add('hidden');
+        // Remove all correctness indicators
+        this.items.forEach(i => i.classList.remove('correct', 'incorrect'));
+        this.finishButton.style.display = 'none'; // ADDED: Hide finish button
+      }
+
+      resetActivity() {
+        // Don't allow reset if the activity is already "finished"
+        if (this.checkButton.style.display === 'none') return;
+        this.hideFeedback();
+        this.items.forEach(item => {
+          item.classList.remove('selected');
+          item.setAttribute('aria-checked', 'false');
+        });
+      }
+      
+      /**
+       * NEW METHOD: finishActivity
+       * Called when the "Finish" button is clicked.
+       */
+      finishActivity() {
+        // Hide buttons
+        this.checkButton.style.display = 'none';
+        this.resetButton.style.display = 'none';
+        this.finishButton.style.display = 'none';
+
+        // Show final feedback
+        this.feedback.classList.remove('hidden', 'error');
+        this.feedback.classList.add('success');
+        this.feedback.textContent = 'Congratulations, you have completed the knowledge check!';
+        
+        // Optional: Disable all items
+        this.items.forEach(item => {
+          item.style.pointerEvents = 'none';
+          item.style.opacity = '0.7';
+          item.tabIndex = -1;
+        });
+      }
+    }
+
+    /**
+     * DOMContentLoaded
+     * Initialize both classes, passing their respective root elements
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      const activity1 = document.getElementById('activity-1');
+      if (activity1) new DragDropSorting(activity1);
+
+      const activity2 = document.getElementById('activity-2');
+      if (activity2) new SelectableActivity(activity2);
+    });
+    
   })();
   </script>
 </body>
