@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knowledge Check - Drag and Drop Sorting (Self-Contained)</title>
+
+  <!-- BeerCSS + JS + Material Dynamic Colors -->
+  <link href="https://cdn.jsdelivr.net/npm/beercss@3.12.8/dist/cdn/beer.min.css" rel="stylesheet">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.12.8/dist/cdn/beer.min.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.2/dist/cdn/material-dynamic-colors.min.js"></script>
+
+  <!-- Lock BeerCSS theme to the original colors -->
+  <style>
+    :root {
+      /* Core theme (Material-style names used by BeerCSS) */
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --secondary: #5f6b7a;
+      --on-secondary: #FFFFFF;
+
+      --background: #F7FAFC;
+      --on-background: #333333;
+
+      --surface: #FFFFFF;
+      --on-surface: #333333;
+
+      --surface-variant: #FFFFFF;
+      --on-surface-variant: #333333;
+
+      --outline: #E7E0EB;
+
+      /* Helpful extras for states you already use */
+      --success: #4CAF50;
+      --on-success: #FFFFFF;
+      --error: #F44336;
+      --on-error: #FFFFFF;
+    }
+  </style>
+
+  <!--
+    Self-contained widget for embedding as a Storyline 360 Web Object.
+    - All CSS & JS inlined (except BeerCSS + scripts above).
+  -->
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%; width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #F7FAFC; color: #333;
+    }
+    .knowledge-check-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+    .title {
+      font-size: 2.2rem; font-weight: 700; color: #6750A4;
+      text-align: center; margin-bottom: 16px;
+    }
+    .instructions { font-size: 1.05rem; text-align: center; color: #5f6b7a; margin-bottom: 32px; }
+    .section-title { font-size: 1.4rem; color: #6750A4; margin-bottom: 16px; text-align: center; }
+
+    .drag-items-container { margin-bottom: 28px; }
+    .draggable-items {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .drag-item {
+      background: #fff; border: 2px solid #E7E0EB; border-radius: 12px; padding: 16px;
+      min-width: 200px; text-align: center; cursor: grab; user-select: none;
+      transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(103,80,164,.08);
+    }
+    .drag-item:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(103,80,164,.18); border-color: #6750A4; }
+    .drag-item:active { cursor: grabbing; }
+    .drag-item.dragging { opacity: .6; transform: rotate(3deg); z-index: 1000; }
+    .drag-item span { font-weight: 600; color: #333; }
+
+    .drop-zones { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .drop-zone {
+      background: #fff; border: 2px dashed #E7E0EB; border-radius: 12px; padding: 16px; min-height: 120px; transition: all .2s ease;
+    }
+    .drop-zone.drag-over { border-color: #6750A4; background-color: rgba(103,80,164,.05); transform: scale(1.01); }
+    .category-title { font-size: 1.05rem; color: #6750A4; margin-bottom: 10px; text-align: center; }
+    .drop-area {
+      min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px; position: relative;
+    }
+    .drop-placeholder { color: #9F9F9F; font-style: italic; text-align: center; }
+    .drop-area .drag-item { margin: 0; width: 100%; }
+    .drop-area.has-item .drop-placeholder { display: none; }
+
+    .feedback-container { margin-top: 28px; text-align: center; }
+    .feedback {
+      padding: 16px; border-radius: 12px; margin-bottom: 16px; font-weight: 600; font-size: 1rem;
+    }
+    .feedback.success { background: rgba(76,175,80,.1); color: #2e7d32; border: 1px solid #4CAF50; }
+    .feedback.error { background: rgba(244,67,54,.1); color: #d11241; border: 1px solid #F44336; }
+    .feedback.hidden { display: none; }
+
+
+
+    @media (max-width: 768px) {
+      .title { font-size: 1.8rem; }
+      .draggable-items { flex-direction: column; align-items: center; }
+      .drop-zones { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="knowledge-check-container" role="application" aria-label="Drag and Drop Knowledge Check">
+
+    <div class="drag-items-container">
+      <div class="draggable-items" aria-label="Draggable items">
+        <div class="drag-item" tabindex="0" draggable="true" data-category="category-1" aria-grabbed="false" role="button" aria-label="High staff turnover rate">
+          <span>High staff turnover rate</span>
+        </div>
+        <div class="drag-item" tabindex="0" draggable="true" data-category="category-2" aria-grabbed="false" role="button" aria-label="Cyber attack on member records">
+          <span>Cyber attack on member records</span>
+        </div>
+        <div class="drag-item" tabindex="0" draggable="true" data-category="category-3" aria-grabbed="false" role="button" aria-label="Negative public opinion">
+          <span>Negative public opinion</span>
+        </div>
+        <div class="drag-item" tabindex="0" draggable="true" data-category="category-4" aria-grabbed="false" role="button" aria-label="Regulatory Penalties">
+          <span>Regulatory Penalties</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drop-zones-container">
+      <div class="drop-zones">
+        <div class="drop-zone" data-category="category-2" role="region" aria-label="Category 2 drop zone">
+          <h3 class="category-title">Technology</h3>
+          <div class="drop-area"></div>
+        </div>
+        <div class="drop-zone" data-category="category-1" role="region" aria-label="Category 1 drop zone">
+          <h3 class="category-title">Human Capital</h3>
+          <div class="drop-area"></div>
+        </div>
+        <div class="drop-zone" data-category="category-4" role="region" aria-label="Category 4 drop zone">
+          <h3 class="category-title">Financial</h3>
+          <div class="drop-area"></div>
+        </div>
+        <div class="drop-zone" data-category="category-3" role="region" aria-label="Category 3 drop zone">
+          <h3 class="category-title">Strategic</h3>
+          <div class="drop-area"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feedback-container">
+      <div id="feedback" class="feedback hidden" role="status" aria-live="polite"></div>
+      <button id="check-answers" class="check-button" type="button">Check Answers</button>
+      <button id="reset" class="reset-button" type="button">Reset</button>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    class DragDropSorting {
+      constructor() {
+        this.draggedElement = null;
+        this.keyboardMode = { active: false, item: null, zoneIndex: 0 };
+        this.init();
+      }
+
+      init() {
+        this.setupDragAndDrop();
+        this.setupButtons();
+        this.setupTouchSupport();
+        this.setupKeyboardAccessibility();
+      }
+
+      setupDragAndDrop() {
+        const dragItems = document.querySelectorAll('.drag-item');
+        const dropZones = document.querySelectorAll('.drop-zone');
+
+        dragItems.forEach(item => {
+          item.addEventListener('dragstart', this.handleDragStart.bind(this));
+          item.addEventListener('dragend', this.handleDragEnd.bind(this));
+        });
+
+        dropZones.forEach(zone => {
+          zone.addEventListener('dragover', this.handleDragOver.bind(this));
+          zone.addEventListener('dragenter', this.handleDragEnter.bind(this));
+          zone.addEventListener('dragleave', this.handleDragLeave.bind(this));
+          zone.addEventListener('drop', this.handleDrop.bind(this));
+        });
+      }
+
+      handleDragStart(e) {
+        this.draggedElement = e.target;
+        e.target.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', '');
+        e.target.setAttribute('aria-grabbed', 'true');
+        this.hideFeedback();
+      }
+
+      handleDragEnd(e) {
+        e.target.classList.remove('dragging');
+        e.target.setAttribute('aria-grabbed', 'false');
+        this.draggedElement = null;
+      }
+
+      handleDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+      handleDragEnter(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+      handleDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+
+      handleDrop(e) {
+        e.preventDefault();
+        e.currentTarget.classList.remove('drag-over');
+        if (!this.draggedElement) return;
+
+        const dropZone = e.currentTarget;
+        const dropArea = dropZone.querySelector('.drop-area');
+        const existingItem = dropArea.querySelector('.drag-item');
+
+        if (existingItem) this.returnItemToOriginalArea(existingItem);
+        this.moveItemToDropZone(this.draggedElement, dropArea);
+      }
+
+      moveItemToDropZone(item, dropArea) {
+        const parent = item.parentNode;
+        if (parent && parent.classList.contains('drop-area')) parent.classList.remove('has-item');
+        item.remove();
+        dropArea.appendChild(item);
+        dropArea.classList.add('has-item');
+        item.style.opacity = '0'; item.style.transform = 'scale(.96)';
+        requestAnimationFrame(() => {
+          item.style.transition = 'all .2s ease'; item.style.opacity = '1'; item.style.transform = 'scale(1)';
+        });
+      }
+
+      returnItemToOriginalArea(item) {
+        const container = document.querySelector('.draggable-items');
+        const dropArea = item.parentNode;
+        item.remove();
+        container.appendChild(item);
+        if (dropArea && dropArea.classList) dropArea.classList.remove('has-item');
+        item.classList.remove('correct', 'incorrect');
+      }
+
+      setupButtons() {
+        const checkButton = document.getElementById('check-answers');
+        const resetButton = document.getElementById('reset');
+        checkButton.addEventListener('click', this.checkAnswers.bind(this));
+        resetButton.addEventListener('click', this.resetGame.bind(this));
+      }
+
+      checkAnswers() {
+        const dropZones = document.querySelectorAll('.drop-zone');
+        let correctCount = 0;
+        let totalItems = 0;
+
+        dropZones.forEach(zone => {
+          const dropArea = zone.querySelector('.drop-area');
+          const item = dropArea.querySelector('.drag-item');
+          if (item) {
+            totalItems++;
+            const itemCategory = item.dataset.category;
+            const zoneCategory = zone.dataset.category;
+            item.classList.remove('correct', 'incorrect');
+            if (itemCategory === zoneCategory) { item.classList.add('correct'); correctCount++; }
+            else { item.classList.add('incorrect'); }
+          }
+        });
+
+        this.showFeedback(correctCount, totalItems);
+      }
+
+      showFeedback(correct, total) {
+        const feedback = document.getElementById('feedback');
+        feedback.classList.remove('hidden', 'success', 'error');
+        if (correct === total && total > 0) {
+          feedback.textContent = `Excellent! You got all ${correct} items correct!`;
+          feedback.classList.add('success');
+        } else if (total > 0) {
+          feedback.textContent = `You got ${correct} out of ${total} items correct. Try again!`;
+          feedback.classList.add('error');
+        } else {
+          feedback.textContent = 'Drag items into the categories to check your answers.';
+          feedback.classList.add('error');
+        }
+      }
+
+      hideFeedback() {
+        const feedback = document.getElementById('feedback');
+        feedback.classList.add('hidden');
+        document.querySelectorAll('.drag-item').forEach(i => i.classList.remove('correct', 'incorrect'));
+      }
+
+      resetGame() {
+        const items = document.querySelectorAll('.drag-item');
+        items.forEach(item => this.returnItemToOriginalArea(item));
+        this.hideFeedback();
+      }
+
+      // Light touch support (for mobile / tablets inside Storyline web object)
+      setupTouchSupport() {
+        const items = document.querySelectorAll('.drag-item');
+        let activeItem = null;
+
+        items.forEach(item => {
+          item.addEventListener('touchstart', (e) => {
+            activeItem = item;
+            item.classList.add('dragging');
+            this.hideFeedback();
+          }, { passive: true });
+
+          item.addEventListener('touchend', (e) => {
+            const touch = e.changedTouches[0];
+            const target = document.elementFromPoint(touch.clientX, touch.clientY);
+            const dropZone = target ? target.closest('.drop-zone') : null;
+            if (dropZone) {
+              const dropArea = dropZone.querySelector('.drop-area');
+              const existingItem = dropArea.querySelector('.drag-item');
+              if (existingItem) this.returnItemToOriginalArea(existingItem);
+              this.moveItemToDropZone(activeItem, dropArea);
+            }
+            item.classList.remove('dragging');
+            activeItem = null;
+          });
+        });
+      }
+
+      // Basic keyboard-only workflow for accessibility
+      setupKeyboardAccessibility() {
+        const items = document.querySelectorAll('.drag-item');
+        const zones = Array.from(document.querySelectorAll('.drop-zone'));
+
+        items.forEach(item => {
+          item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !this.keyboardMode.active) {
+              this.keyboardMode = { active: true, item, zoneIndex: 0 };
+              item.setAttribute('aria-grabbed', 'true');
+              zones[0].classList.add('drag-over');
+              e.preventDefault();
+            } else if (this.keyboardMode.active) {
+              if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                zones[this.keyboardMode.zoneIndex].classList.remove('drag-over');
+                this.keyboardMode.zoneIndex = (this.keyboardMode.zoneIndex + 1) % zones.length;
+                zones[this.keyboardMode.zoneIndex].classList.add('drag-over');
+                e.preventDefault();
+              } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                zones[this.keyboardMode.zoneIndex].classList.remove('drag-over');
+                this.keyboardMode.zoneIndex = (this.keyboardMode.zoneIndex - 1 + zones.length) % zones.length;
+                zones[this.keyboardMode.zoneIndex].classList.add('drag-over');
+                e.preventDefault();
+              } else if (e.key === 'Enter' || e.key === ' ') {
+                zones.forEach(z => z.classList.remove('drag-over'));
+                const dropArea = zones[this.keyboardMode.zoneIndex].querySelector('.drop-area');
+                const existingItem = dropArea.querySelector('.drag-item');
+                if (existingItem) this.returnItemToOriginalArea(existingItem);
+                this.moveItemToDropZone(this.keyboardMode.item, dropArea);
+                this.keyboardMode.item.setAttribute('aria-grabbed', 'false');
+                this.keyboardMode = { active: false, item: null, zoneIndex: 0 };
+                e.preventDefault();
+              } else if (e.key === 'Escape') {
+                zones.forEach(z => z.classList.remove('drag-over'));
+                this.keyboardMode.item.setAttribute('aria-grabbed', 'false');
+                this.keyboardMode = { active: false, item: null, zoneIndex: 0 };
+                e.preventDefault();
+              }
+            }
+          });
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => new DragDropSorting());
+  })();
+  </script>
+</body>
+</html>
